@@ -1,27 +1,30 @@
 {
-  "name": "electron-react-redux-boilerplate",
+  "name": "DataASAP",
   "version": "0.0.0",
   "description": "electron-react-redux-boilerplate",
   "main": "init.js",
   "author": {
-    "name": "Jordan Schroter",
-    "email": "email@author.com"
+    "name": "Dave Cheli",
+    "email": "dcheli@live.com"
   },
   "repository": "https://github.com/jschr/electron-react-redux-boilerplate",
   "license": "MIT",
   "dependencies": {
     "babel-runtime": "^6.26.0",
+    "electron-context-menu": "^0.10.0",
     "history": "^4.6.3",
     "prop-types": "^15.5.10",
-    "react": "^16.2.0",
+    "react": "^16.5.2",
     "react-dom": "^16.2.0",
-    "react-redux": "^5.0.2",
-    "react-router": "^4.1.2",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
     "react-router-redux": "^5.0.0-alpha.8",
-    "redux": "^4.0.0",
+    "redux": "^4.0.1",
     "redux-actions": "^2.2.1",
     "redux-localstorage": "^0.4.1",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "semantic-ui-react": "^0.83.0"
   },
   "devDependencies": {
     "babel-cli": "^6.22.2",
@@ -35,8 +38,8 @@
     "babel-preset-react": "^6.24.1",
     "browser-sync": "^2.23.6",
     "chai": "^4.1.0",
-    "electron": "^2.0.5",
-    "electron-builder": "^20.0.7",
+    "electron": "^3.0.5",
+    "electron-builder": "^20.28.4",
     "electron-devtools-installer": "^2.2.4",
     "electron-mocha": "^6.0.1",
     "eslint": "^5.1.0",
@@ -49,7 +52,7 @@
   },
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
-    "develop": "npm run private:compile -- --source-maps true && run-p -r private:watch private:serve",
+    "dev": "npm run private:compile -- --source-maps true && run-p -r private:watch private:serve",
     "test": "electron-mocha --renderer -R spec --require babel-core/register test/**/*.spec.js",
     "lint": "eslint --no-ignore scripts app test *.js",
     "format": "npm run private:format -- --write",

@@ -1,6 +1,6 @@
-appId: com.example.app
+appId: com.dataasap.app
 copyright: Example co
-productName: MyApp
+productName: DataASAP
 
 asar: true
 

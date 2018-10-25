@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { ipcRenderer } from 'electron';
+
 export default class Login extends Component {
   static propTypes = {
     onLogin: PropTypes.func.isRequired,
@@ -11,10 +13,11 @@ export default class Login extends Component {
   };
 
   handleLogin = () => {
-    this.props.onLogin({
-      username: this.state.username,
-      loggedIn: true,
-    });
+    ipcRenderer.send('selectDirectory');
+//    this.props.onLogin({
+//      username: this.state.username,
+//      loggedIn: true,
+//    });
   };
 
   handleChange = (e) => {

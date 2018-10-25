@@ -5,6 +5,11 @@
 
 A minimal boilerplate to get started with [Electron](http://electron.atom.io/), [React](https://facebook.github.io/react/) and [Redux](http://redux.js.org/).
 
+
+MOST IMPORTANT LINK IS - this will give you an actual config
+that allows you to create a release package without hacks
+https://github.com/jschr/electron-react-redux-boilerplate
+
 Including:
 
 * [React Router](https://reacttraining.com/react-router/)

@@ -1,10 +1,23 @@
 import path from 'path';
-import { app, crashReporter, BrowserWindow, Menu } from 'electron';
+import { app, crashReporter, BrowserWindow, Menu, dialog, ipcMain } from 'electron';
+import menuTemplate from './menuTemplate';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
+const fs = require('fs');
 
 let mainWindow = null;
 let forceQuit = false;
+
+
+
+
+require('electron-context-menu')({
+    prepend: (params, browserWindow) => [{
+        label: 'Rainbow',
+        // Only show it when right-clicking images
+        visible: params.mediaType === 'image'
+    }]
+});
 
 const installExtensions = async () => {
   const installer = require('electron-devtools-installer');
@@ -45,8 +58,16 @@ app.on('ready', async () => {
     minWidth: 640,
     minHeight: 480,
     show: false,
+    webPreferences: {
+        backgroundThrottling: false
+    }
   });
-
+  console.log("Template is ", menuTemplate);
+  const menu = Menu.buildFromTemplate(menuTemplate);
+  Menu.setApplicationMenu(menu);
+  mainWindow.webContents.openDevTools();
+ 
+  
   mainWindow.loadFile(path.resolve(path.join(__dirname, '../renderer/index.html')));
 
   // show window once on first load
@@ -86,7 +107,7 @@ app.on('ready', async () => {
     mainWindow.webContents.openDevTools();
 
     // add inspect element on right click menu
-    mainWindow.webContents.on('context-menu', (e, props) => {
+    /*mainWindow.webContents.on('context-menu', (e, props) => {
       Menu.buildFromTemplate([
         {
           label: 'Inspect element',
@@ -95,6 +116,38 @@ app.on('ready', async () => {
           },
         },
       ]).popup(mainWindow);
-    });
+    });*/
   }
 });
+
+
+let dir;
+ipcMain.on('selectDirectory', () => {
+  dir = dialog.showOpenDialog(mainWindow, {
+      properties: ['openDirectory']
+  });
+});
+
+
+ipcMain.on('folder:open', (event, content) => {
+    
+
+    // WE DON"T KNOW WHAT VALUE CONTENT IS
+    dialog.showSaveDialog((fileName) => {
+        //http://mylifeforthecode.com/getting-started-with-standard-dialogs-in-electron/
+  
+          if(fileName === undefined) {
+              console.log("you did not enter a file name");
+              return;
+          }
+  
+          var rawContent = content.replace(/<[^>]+>/g, "");
+          fs.writeFile(fileName, rawContent, (error) => {  
+              if(null){ 
+                  console.log("Error Saving File ", error);
+                  // maybe pop up an alert
+              }
+          });
+          
+      });
+  });
