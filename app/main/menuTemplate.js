@@ -50,7 +50,8 @@
 
     if (process.platform === 'darwin') {
         template.unshift({
-          label: app.getName(),
+          //label: app.getName(),
+          label: "DataASAP",
           submenu: [
             {role: 'about'},
             {type: 'separator'},
