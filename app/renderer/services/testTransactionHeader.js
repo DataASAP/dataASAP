@@ -1,4 +1,6 @@
 import Constants from '../configs/Constants';
+import fastXmlParser from 'fast-xml-parser';
+import he from 'he';
 
 let parseTransactionHeader = (input) => {
 
@@ -11,15 +13,33 @@ let parseTransactionHeader = (input) => {
     var groupSeparator = '';
     var isRequest;
     
+    var xmlOptions = {
+        attributeNamePrefix : "_",
+        attrNodeName: "attr", //default is 'false'
+        textNodeName : "#text",
+        ignoreAttributes : false,
+        ignoreNameSpace : false,
+        allowBooleanAttributes : false,
+        parseNodeValue : true,
+        parseAttributeValue : false,
+        trimValues: true,
+        cdataTagName: "__cdata", //default is 'false'
+        cdataPositionChar: "\\c",
+        localeRange: "", //To support non english character in tag/attribute values.
+        parseTrueNumberOnly: false,
+        attrValueProcessor: a => he.decode(a, {isAttributeValue: true}),//default is a=>a
+        tagValueProcessor : a => he.decode(a) //default is a=>a
+    };
+    if( input.indexOf("<?xml")=== -1){
       
-    var stripedHtml = input.replace(/<[^>]+>/g, "");
-    var stripedHtml = stripedHtml.replace(/&nbsp;/g, ' ');
-
-     // remove any leading control characters, e.g. stx; 
-    // do not strip out control characters x1C-x1E
-
-    var str = stripedHtml.replace(/[\x00-\x1B\x7F-\x9F]/g, "");
-    //console.log("input data for parsing ", str);
+        var stripedHtml = input.replace(/<[^>]+>/g, "");
+        var stripedHtml = stripedHtml.replace(/&nbsp;/g, ' ');
+        // remove any leading control characters, e.g. stx; 
+        // do not strip out control characters x1C-x1E
+        var str = stripedHtml.replace(/[\x00-\x1B\x7F-\x9F]/g, "");
+    } else {
+        str = input;
+    }
 
     switch(str.substring(0,3)) {
         case "ISA":
@@ -54,11 +74,34 @@ let parseTransactionHeader = (input) => {
             type = "HL7";
             break;
         case "<?x":
-            if(str.substring(0,21) === "<?xml version=\"1.0\"?>") {
-                type = "HL7";
-                console.log("Hmmm it's xml");
+        // Now what is it, NCPDP or HL7 or something else?
+            if(str.indexOf("www.ncpdp.org")) {
+            // we have NCPDP SCRIPT
+                if(fastXmlParser.validate(str)=== true){//optional
+                    var jsonObj = fastXmlParser.parse(str, xmlOptions);
+                    const {_version, _release} = jsonObj.Message.attr;
+                    type = "SCRIPT";
+
+                    version = _version.replace(/^0+/, '') + "." + _release.replace(/^0+/, '');
+                    if(jsonObj.Message.Body.hasOwnProperty("NewRx")) {
+                        transaction = "New Prescription";
+                    } else if(jsonObj.Message.Body.hasOwnProperty("RefillRequest")) {
+                        transaction = "Refill Request";
+                    } else if(jsonObj.Message.Body.hasOwnProperty("RefillResponse")) {
+                        transaction = "Refill Response";
+                    } else if(jsonObj.Message.Body.hasOwnProperty("RxHistoryRequest")) {
+                        transaction = "Prescription History Request";
+                    } else if(jsonObj.Message.Body.hasOwnProperty("RxHistoryResponse")) {
+                        transaction = "Prescription History Response";
+                    }
+                } else {console.log ("Not valid")}
+            } else if (str.indexOf("hl7-org")) {
+                // it's HL7
+            } else {
+                // got nothing
             }
-            output = {"type:" : "HL7", "version": "3.2", "transaction": "something"};
+
+
             break;
         default:
             const { NCPDP_RECORD_SEP } = Constants;

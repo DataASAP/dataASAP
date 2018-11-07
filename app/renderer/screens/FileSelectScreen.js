@@ -8,19 +8,10 @@ import { Form, Button, Divider,
 import testTransactionHeader from '../services/testTransactionHeader';
 import deidentifyStrategy from '../services/deidentifyStrategy';
 
-// THIS CREATES A PROBLEM; This is the one to fix; CAN YOU MOVE THIS TO MAIN.JS??
-//import { remote } from 'electron';
 import replaceControlCharacters from '../services/replaceControlChars';
 import restoreControlCharacters from '../services/restoreControlCharacters';
 import { ipcRenderer } from 'electron';
 
-// THIS CREATES A PROBLEM; I don't think this is even used
-//import { copy } from 'fs-extra-p';
-
-
-// THIS PROBABLY WILL CREATE A PROBLEM TOO
-//const fs = window.require('fs');
-//const dialog = remote.dialog;
 
 class FileSelectScreen extends Component {
   state = {
@@ -48,66 +39,55 @@ class FileSelectScreen extends Component {
         document.getElementById('deIDContent').innerText = '';
         this.setState({deidTextArea: '', saveAsDisabled: true, sendToDisabled: true,show:'unhide', showDisplay:'Show Changes'});
     }
-/*
-    enableSaveAsButton = () => {
-        this.setState({saveAsDisabled: false});
-    }
 
- //   saveAs = () => {
- //       console.log(dialog);
- //   }
-*/
-  deidentifyData = () => {
+    deidentifyData = () => {
         var deIDData = deidentifyStrategy(this.state.input ,this.state.transactionInfo);
-        var displayDeIDData = replaceControlCharacters(deIDData);
-        document.getElementById('deIDContent').innerHTML = displayDeIDData;
-        this.setState({deidTextArea: deIDData, saveAsDisabled: false, sendToDisabled: false, show:'unhide', showDisplay:'Show Changes'});
-  }
-  
-  saveFile = () => {  
-    var content = this.state.deidTextArea; 
+        var displayDeIDData;
+        if(deIDData.indexOf("<?xml") > -1) {
+            displayDeIDData = deIDData.replace(/\</g,"&lt;");
+            displayDeIDData = displayDeIDData.replace(/\>/g,"&gt;");
+            displayDeIDData = displayDeIDData.replace(/&lt;span class='deid' style='background-color: white;'&gt;/g,"<span class='deid' style='background-color: white;'>");
+            displayDeIDData = displayDeIDData.replace(/&lt;\/span&gt;/g,"</span>");
 
-    ipcRenderer.send('folder:open', content);
-/*
-    dialog.showSaveDialog((fileName) => {
-      //http://mylifeforthecode.com/getting-started-with-standard-dialogs-in-electron/
-
-        if(fileName === undefined) {
-            console.log("you did not enter a file name");
-            return;
-        }
-
-        var rawContent = content.replace(/<[^>]+>/g, "");
-        fs.writeFile(fileName, rawContent, (error) => {  
-            if(null){ 
-                console.log("Error Saving File ", error);
-                // maybe pop up an alert
-            }
-        });
-        
-  //  }); 
-*/    
-  }
-
-
-
-  showChanges = () => {
-    var elements = document.getElementsByClassName("deid");
-
-    if(this.state.show === "hide") {
-        for (var i = 0; i < elements.length; i++) {
-           elements[i].style.backgroundColor="white";
-       }
+            document.getElementById('deIDContent').innerHTML = displayDeIDData;
+            this.setState({deidTextArea: displayDeIDData, saveAsDisabled: false, sendToDisabled: false, show:'unhide', showDisplay:'Show Changes'});
     
-        this.setState({show: "unhide", showDisplay: "Show Changes"})
-    } else {
-        for (var i = 0; i < elements.length; i++) {
-            elements[i].style.backgroundColor="yellow";
+        } else {
+            displayDeIDData = replaceControlCharacters(deIDData);
+            document.getElementById('deIDContent').innerHTML = displayDeIDData;
+            this.setState({deidTextArea: deIDData, saveAsDisabled: false, sendToDisabled: false, show:'unhide', showDisplay:'Show Changes'});    
         }
- 
-        this.setState({show: "hide", showDisplay: "Hide Changes"})
     }
-  }
+  
+    saveFile = () => {  
+        var content = this.state.deidTextArea; 
+    
+        // if the data is xml then you need to repace html entities
+        if(content.indexOf("?xml")> -1) {    
+            content = content.replace(/&gt;/g,">");
+            content = content.replace(/&lt;/g,"<");
+        }
+        ipcRenderer.send('folder:open', content);
+    }
+
+
+    showChanges = () => {
+        var elements = document.getElementsByClassName("deid");
+
+        if(this.state.show === "hide") {
+            for (var i = 0; i < elements.length; i++) {
+            elements[i].style.backgroundColor="white";
+        }
+        
+            this.setState({show: "unhide", showDisplay: "Show Changes"})
+        } else {
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].style.backgroundColor="yellow";
+            }
+    
+            this.setState({show: "hide", showDisplay: "Hide Changes"})
+        }
+    }
 
   /*
   onDrop = (files) => {
@@ -151,7 +131,17 @@ class FileSelectScreen extends Component {
   divPaste = (event) => {
     event.preventDefault();
     var input = event.clipboardData.getData('Text');
-    var displayStr = replaceControlCharacters(input);
+    var displayStr;
+    
+    if(input.indexOf("<?xml") > -1) {
+       
+        displayStr = input.replace(/\</g,"&lt;");
+        displayStr = displayStr.replace(/\>/g,"&gt;");
+     
+    } else {
+        displayStr = replaceControlCharacters(input);
+    }
+    
     document.getElementById('displayContent').innerHTML = displayStr;
     
     

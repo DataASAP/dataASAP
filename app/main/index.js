@@ -62,7 +62,6 @@ app.on('ready', async () => {
         backgroundThrottling: false
     }
   });
-  console.log("Template is ", menuTemplate);
   const menu = Menu.buildFromTemplate(menuTemplate);
   Menu.setApplicationMenu(menu);
   mainWindow.webContents.openDevTools();
@@ -131,7 +130,7 @@ ipcMain.on('selectDirectory', () => {
 
 ipcMain.on('folder:open', (event, content) => {
     
-
+  
     // WE DON"T KNOW WHAT VALUE CONTENT IS
     dialog.showSaveDialog((fileName) => {
         //http://mylifeforthecode.com/getting-started-with-standard-dialogs-in-electron/
@@ -141,7 +140,13 @@ ipcMain.on('folder:open', (event, content) => {
               return;
           }
   
-          var rawContent = content.replace(/<[^>]+>/g, "");
+          var rawContent;
+          if(content.indexOf("?xml")> -1) {
+              rawContent = content;
+          } else {
+            rawContent = content.replace(/<[^>]+>/g, ""); // I think this replaces HTML tags
+          }
+          
           fs.writeFile(fileName, rawContent, (error) => {  
               if(null){ 
                   console.log("Error Saving File ", error);
