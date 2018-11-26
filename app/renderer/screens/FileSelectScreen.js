@@ -11,6 +11,7 @@ import deidentifyStrategy from '../services/deidentifyStrategy';
 import replaceControlCharacters from '../services/replaceControlChars';
 import restoreControlCharacters from '../services/restoreControlCharacters';
 import { ipcRenderer } from 'electron';
+//const LoadXML = require('../XMLDisplay');
 
 
 class FileSelectScreen extends Component {
@@ -44,12 +45,17 @@ class FileSelectScreen extends Component {
         var deIDData = deidentifyStrategy(this.state.input ,this.state.transactionInfo);
         var displayDeIDData;
         if(deIDData.indexOf("<?xml") > -1) {
+            displayDeIDData = deIDData;
+
+            /////////// This was originally used to display the xml in the div, not sure it's needed anymore
             displayDeIDData = deIDData.replace(/\</g,"&lt;");
             displayDeIDData = displayDeIDData.replace(/\>/g,"&gt;");
             displayDeIDData = displayDeIDData.replace(/&lt;span class='deid' style='background-color: white;'&gt;/g,"<span class='deid' style='background-color: white;'>");
             displayDeIDData = displayDeIDData.replace(/&lt;\/span&gt;/g,"</span>");
-
-            document.getElementById('deIDContent').innerHTML = displayDeIDData;
+            document.getElementById('deIDContent').innerHTML =  displayDeIDData;
+            //////////////
+            
+           // LoadXMLString('deIDContent', displayDeIDData);
             this.setState({deidTextArea: displayDeIDData, saveAsDisabled: false, sendToDisabled: false, show:'unhide', showDisplay:'Show Changes'});
     
         } else {
@@ -135,15 +141,18 @@ class FileSelectScreen extends Component {
     
     if(input.indexOf("<?xml") > -1) {
        
-        displayStr = input.replace(/\</g,"&lt;");
-        displayStr = displayStr.replace(/\>/g,"&gt;");
+        //displayStr = input.replace(/\</g,"&lt;");
+        //displayStr = displayStr.replace(/\>/g,"&gt;");
+       // displayStr = '<pre lang="xml">' + displayStr + '</pre>';
+        displayStr = input;
+        LoadXMLString('displayContent', displayStr);
      
     } else {
         displayStr = replaceControlCharacters(input);
+        document.getElementById('displayContent').innerHTML = displayStr;
     }
     
-    document.getElementById('displayContent').innerHTML = displayStr;
-    
+    //document.getElementById('displayContent').innerHTML = displayStr;
     
     var transactionInfo = testTransactionHeader(input);
     
@@ -154,17 +163,6 @@ class FileSelectScreen extends Component {
         this.setState({ input,  transactionInfo});
     }
 
-    /*
-  renderChildren({ isDragActive, isDragReject }) {
-    if (isDragActive) {
-      return <h4 className="drop-message">Omnomnom, let me have those files!</h4>;
-    } else if (isDragReject) {
-      return <h4 className="drop-message">Uh oh, I don't know how to deal with that type of file!</h4>;
-    } else {
-      return <p className="drop-message1">Attach files by dragging & dropping, selecting them, or pasting from the clipboard.</p>
-    }
-  }
-*/
   render() {
     
     return (
@@ -189,8 +187,14 @@ class FileSelectScreen extends Component {
                    <div contentEditable
                         id="displayContent"
                         onPaste={this.divPaste}
-                        style={{minHeight: 200, border: '2px solid black', 
-                        borderRadius: '5px 5px 0px 0px', borderStyle: 'solid'}}>
+                        style={{
+                            minHeight: 200, 
+                            maxHeight: 400,
+                            border: '2px solid black', 
+                            borderRadius: '5px 5px 0px 0px', borderStyle: 'solid',
+                            overflow: 'hidden', 
+                            overflowY: 'scroll'
+                             }}>
                         
                         </div>
                                             
@@ -221,8 +225,13 @@ class FileSelectScreen extends Component {
                     <div 
                         id="deIDContent"
                         onCopy={this.copyToClipboard}
-                        style={{minHeight: 200, border: '2px solid black', 
-                        borderRadius: '5px 5px 0px 0px'}}>    
+                        style={{
+                            minHeight: 200,
+                            maxHeight: 400,
+                            border: '2px solid black', 
+                            borderRadius: '5px 5px 0px 0px',
+                            overflow: 'hidden', 
+                            overflowY: 'scroll'}}>    
                     </div>
                     
                     <Segment basic floated="right" clearing>

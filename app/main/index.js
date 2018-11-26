@@ -1,14 +1,14 @@
 import path from 'path';
 import { app, crashReporter, BrowserWindow, Menu, dialog, ipcMain } from 'electron';
-import menuTemplate from './menuTemplate';
+//import mainTemplate from './menuTemplate';
+
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 const fs = require('fs');
 
 let mainWindow = null;
+let configWindow = null;
 let forceQuit = false;
-
-
 
 
 require('electron-context-menu')({
@@ -32,13 +32,29 @@ const installExtensions = async () => {
   }
 };
 
+
+
+function createConfigWindow(type) {
+    console.log("Creating config window with ", type);
+    configWindow = new BrowserWindow({
+        width: 1000,
+        height: 800,
+         title: "Config Stuff"
+    });
+
+    const configMenu = Menu.buildFromTemplate(configTemplate);
+    var dir = path.resolve(path.join(__dirname, '../renderer/config.html'));
+    configWindow.webContents.openDevTools();
+    configWindow.loadURL(`${dir}#/${type}`);
+    configWindow.setMenu(configMenu);
+}
+
 crashReporter.start({
   productName: 'YourName',
   companyName: 'YourCompany',
   submitURL: 'https://your-domain.com/url-to-submit',
   uploadToServer: false,
 });
-
 app.on('window-all-closed', () => {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
@@ -62,17 +78,21 @@ app.on('ready', async () => {
         backgroundThrottling: false
     }
   });
-  const menu = Menu.buildFromTemplate(menuTemplate);
+  
+  const menu = Menu.buildFromTemplate(mainTemplate);
   Menu.setApplicationMenu(menu);
   mainWindow.webContents.openDevTools();
  
   
   mainWindow.loadFile(path.resolve(path.join(__dirname, '../renderer/index.html')));
+  mainWindow.on('closed', () => { app.quit() });
+
 
   // show window once on first load
   mainWindow.webContents.once('did-finish-load', () => {
     mainWindow.show();
   });
+
 
   mainWindow.webContents.on('did-finish-load', () => {
     // Handle window logic properly on macOS:
@@ -85,6 +105,10 @@ app.on('ready', async () => {
           e.preventDefault();
           mainWindow.hide();
         }
+      });
+      app.on('browser-window-focus', () => {
+          console.log("Calling browser-window-focus");
+        createMainMenu();
       });
 
       app.on('activate', () => {
@@ -120,13 +144,9 @@ app.on('ready', async () => {
 });
 
 
-let dir;
-ipcMain.on('selectDirectory', () => {
-  dir = dialog.showOpenDialog(mainWindow, {
-      properties: ['openDirectory']
-  });
+ipcMain.on('saveConfig', (event, content) => {
+    console.log("Saving content ", content);
 });
-
 
 ipcMain.on('folder:open', (event, content) => {
     
@@ -156,3 +176,129 @@ ipcMain.on('folder:open', (event, content) => {
           
       });
   });
+
+
+
+  const configTemplate = [
+    { role: 'Close' }
+    ];
+
+  const mainTemplate = [
+    {
+        label: 'File',
+        submenu: [
+            {role: 'quit'}
+        ]
+    },
+    {
+        label: 'Edit',
+        submenu: [
+            {role: 'undo'},
+            {role: 'redo'},
+            {type: 'separator'},
+            {role: 'cut'},
+            {role: 'copy'},
+            {role: 'paste'},
+            {role: 'pasteandmatchstyle'},
+            {role: 'delete'},
+            {role: 'selectall'}
+    ]
+    },
+    {
+        label: 'View',
+        submenu: [
+            {role: 'reload'},
+            {role: 'forcereload'},
+            {role: 'toggledevtools'},
+            {type: 'separator'},
+            {role: 'resetzoom'},
+            {role: 'zoomin'},
+            {role: 'zoomout'},
+            {type: 'separator'},
+            {role: 'togglefullscreen'}
+        ]
+    },
+    {
+        role: 'Window',
+        submenu: [
+            {role: 'minimize'}
+        ]
+    },
+    {
+        label: 'Config',
+        submenu: [
+            {
+            label: 'Deidentify',
+            submenu: [
+                {
+                    label:'NCPDP',        
+                    submenu:[
+                    {
+                        label: "NCPDP D.0",
+                        click()  { createConfigWindow("NCPDP_D0");  }
+                    },
+                    { 
+                        label: "SCRIPT 10.6",
+                        click()  { createConfigWindow("SCRIPT_10_6");  }
+                    }
+                    ]
+                },
+                {label: "X12"},
+            
+                {label: "Hl7"}
+            ]
+            }
+        ]
+    },
+    {
+        role: 'Help',
+        submenu: [
+            {
+            label: 'Learn More',
+            click () { require('electron').shell.openExternal('https://electronjs.org') }
+            }
+        ]
+    }
+];
+
+
+
+if (process.platform === 'darwin') {
+    template.unshift({
+      //label: app.getName(),
+      label: "DataASAP",
+      submenu: [
+        {role: 'about'},
+        {type: 'separator'},
+        {role: 'services', submenu: []},
+        {type: 'separator'},
+        {role: 'hide'},
+        {role: 'hideothers'},
+        {role: 'unhide'},
+        {type: 'separator'},
+        {role: 'quit'}
+      ]
+    })
+  
+    // Edit menu
+    template[1].submenu.push(
+      {type: 'separator'},
+      {
+        label: 'Speech',
+        submenu: [
+          {role: 'startspeaking'},
+          {role: 'stopspeaking'}
+        ]
+      }
+    )
+  
+    // Window menu
+    template[3].submenu = [
+      {role: 'close'},
+      {role: 'minimize'},
+      {role: 'zoom'},
+      {type: 'separator'},
+      {role: 'front'}
+    ]
+
+}

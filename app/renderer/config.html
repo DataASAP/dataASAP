@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
+    <title>Config Screen</title>
+  </head>
+  <body>
+    <div id="config">Config stuff goes here for </div>
+    <script id="myscript">
+    
+        const params = new URLSearchParams(window.location.search)
+        const d_type = params.get('type');
+        
+    </script>
+    
+    <script src="./config.js"  data-container="#config"></script>
+    <script>
+      if (process.env.BROWSER_SYNC_CLIENT_URL) {
+        const current = document.currentScript;
+        const script = document.createElement('script');
+        script.src = process.env.BROWSER_SYNC_CLIENT_URL;
+        script.async = true;
+        current.parentNode.insertBefore(script, current);
+      }
+    </script>
+  </body>
+</html>

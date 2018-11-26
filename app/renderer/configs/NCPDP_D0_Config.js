@@ -1,12 +1,5 @@
-
-
-//Cardholder First Name; 312-CC, Last Name 313-CD, Patient First 310-CA, Last 311-CB
-
-
-
-
 const NCPDP_D0_Config = {
-    "1_cardholderFirstName":  {"displayName": "Cardholder First Name","location": {"segment": "AM04", "dataElementId": "CC"}, "deidentify" : true, "defaultValue": "DA_CARDHOLDER FIRSTNAME"},
+    "1_cardholderFirstName":  {"displayName": "Cardholder First Name","location": {"segment": "AM04", "dataElementId": "CC"}, "deidentify" : false, "defaultValue": "DA_CARDHOLDER FIRSTNAME"},
     "2_cardholderLastName":   {"displayName": "Cardholder Last Name","location": {"segment": "AM04", "dataElementId": "CD"}, "deidentify" : true, "defaultValue": "DA_CARDHOLDER LASTNAME"},
     "3_patientFirstName":     {"displayName": "Patient First Name","location": {"segment": "AM01", "dataElementId": "CA"}, "deidentify" : true, "defaultValue": "DA_PATIENT FIRSTNAME"},
     "4_patientLastName":      {"displayName": "Patient Last Name","location": {"segment": "AM01", "dataElementId": "CB"}, "deidentify" : true, "defaultValue": "DA_PATIENT LASTNAME"},
