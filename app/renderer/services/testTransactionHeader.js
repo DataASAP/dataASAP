@@ -75,13 +75,12 @@ let parseTransactionHeader = (input) => {
             break;
         case "<?x":
         // Now what is it, NCPDP or HL7 or something else?
-            if(str.indexOf("www.ncpdp.org")) {
-            // we have NCPDP SCRIPT
+            if((str.indexOf("www.ncpdp.org") > -1)
+                && (str.indexOf("<Message") > -1 )) {
                 if(fastXmlParser.validate(str)=== true){//optional
                     var jsonObj = fastXmlParser.parse(str, xmlOptions);
                     const {_version, _release} = jsonObj.Message.attr;
                     type = "SCRIPT";
-
                     version = _version.replace(/^0+/, '') + "." + _release.replace(/^0+/, '');
                     if(jsonObj.Message.Body.hasOwnProperty("NewRx")) {
                         transaction = "New Prescription";
@@ -94,11 +93,16 @@ let parseTransactionHeader = (input) => {
                     } else if(jsonObj.Message.Body.hasOwnProperty("RxHistoryResponse")) {
                         transaction = "Prescription History Response";
                     }
-                } else {console.log ("Not valid")}
-            } else if (str.indexOf("hl7-org")) {
+                } else {
+                   console.log("XML not valid")    
+                }
+            } else if (str.indexOf("hl7-org") > -1) {
                 // it's HL7
             } else {
-                // got nothing
+                console.log("I don't know")
+                type = "UNKNOWN";
+                version = "N/A";
+                transaction = "N/A";
             }
 
 

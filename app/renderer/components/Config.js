@@ -1,9 +1,12 @@
 import _ from 'lodash';
-
 import React, { Component } from 'react';
 import NCPDP_D0_Config from '../configs/NCPDP_D0_Config';
-import { Container, Segment, Accordion, Icon, Table, Input,  Checkbox, Button} from 'semantic-ui-react';
+import { Container, Segment, Accordion, Icon, 
+    Table, Input,  Checkbox, Button, Message} from 'semantic-ui-react';
 import { ipcRenderer } from 'electron';
+import Store from '../../main/Store';
+
+var config;
 const segmentNames = {
     "HEADER": "Transaction Header",
     "AM01" : "Patient Segment",
@@ -46,32 +49,55 @@ const segmentNames = {
 }
 
 class Config extends Component {
+    
     constructor(props) {
         super(props);
         this.state = {
             activeIndex: 0,
-            itemsToSave: false
+            itemsToSave: false,
+            showSaveMessage: false
         };
+
+        // figure out what config are you modifying
+        const store = new Store({
+            configName : 'user-preferences',
+            content: {},
+            domain: this.props.domain,
+            type: this.props.type
+        });
+
+        // you need to find the config file
+        if(store.exists()) {
+            config = store.get(this.props.type);        
+            if(config == null) {
+                config = NCPDP_D0_Config;
+            }
+        } else {
+            config = NCPDP_D0_Config;
+        }
     }
 
     handleSaveClick = (e, content) => {
-        console.log("sending to ipcMain", NCPDP_D0_Config);
-        ipcRenderer.send('saveConfig', NCPDP_D0_Config);
+        ipcRenderer.send('saveConfig', 'ncpdp' , this.props.type, config);
+        this.setState({itemsToSave: false, showSaveMessage: true});
     };
 
     handleOnChangeDefaultValue = (e, data) => {
-        _.forEach(NCPDP_D0_Config, (value, key) => {
+        _.forEach(config, (value, key) => {
             if(value.displayName === data.name) {
-                NCPDP_D0_Config[key].defaultValue = data.value;
+                config[key].defaultValue = data.value;
             }
         });
         this.setState({itemsToSave: true})
     }
+    handleOnDismiss = () => {
+        this.setState({showSaveMessage: false});
+    }
 
     handleOnChangeDeid = (e, data) => {
-        _.forEach(NCPDP_D0_Config, (value, key) => {
+        _.forEach(config, (value, key) => {
             if(value.displayName === data.name) {
-                NCPDP_D0_Config[key].deidentify = (data.value == 'true') ? true : false;
+                config[key].deidentify = (data.value == 'true') ? true : false;
             }
         });
         this.setState({itemsToSave: true})
@@ -86,7 +112,7 @@ class Config extends Component {
     }
 
     renderAccordion() {
-        var segments = _.groupBy(NCPDP_D0_Config, 'location.segment');
+        var segments = _.groupBy(config, 'location.segment');
         
         var ordered = {};
         _(segments).keys().sort().each(function (key) {
@@ -174,6 +200,12 @@ class Config extends Component {
                         onClick={this.handleSaveClick}>Save</Button>
                     <Button primary floated='right'>Cancel</Button>
                 </Segment>
+               {(this.state.showSaveMessage) ?
+                <Message 
+                    positive
+                    content="Your Changes have been saved" 
+                    onDismiss={this.handleOnDismiss}/> : ""
+                }
                 <Accordion fluid styled>
                     {this.renderAccordion()}
                 </Accordion> 

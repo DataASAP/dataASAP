@@ -11,8 +11,6 @@ import deidentifyStrategy from '../services/deidentifyStrategy';
 import replaceControlCharacters from '../services/replaceControlChars';
 import restoreControlCharacters from '../services/restoreControlCharacters';
 import { ipcRenderer } from 'electron';
-//const LoadXML = require('../XMLDisplay');
-
 
 class FileSelectScreen extends Component {
   state = {
@@ -46,16 +44,12 @@ class FileSelectScreen extends Component {
         var displayDeIDData;
         if(deIDData.indexOf("<?xml") > -1) {
             displayDeIDData = deIDData;
-
-            /////////// This was originally used to display the xml in the div, not sure it's needed anymore
             displayDeIDData = deIDData.replace(/\</g,"&lt;");
             displayDeIDData = displayDeIDData.replace(/\>/g,"&gt;");
             displayDeIDData = displayDeIDData.replace(/&lt;span class='deid' style='background-color: white;'&gt;/g,"<span class='deid' style='background-color: white;'>");
             displayDeIDData = displayDeIDData.replace(/&lt;\/span&gt;/g,"</span>");
             document.getElementById('deIDContent').innerHTML =  displayDeIDData;
-            //////////////
             
-           // LoadXMLString('deIDContent', displayDeIDData);
             this.setState({deidTextArea: displayDeIDData, saveAsDisabled: false, sendToDisabled: false, show:'unhide', showDisplay:'Show Changes'});
     
         } else {
@@ -134,33 +128,48 @@ class FileSelectScreen extends Component {
     }
 
 
-  divPaste = (event) => {
-    event.preventDefault();
-    var input = event.clipboardData.getData('Text');
-    var displayStr;
+    divPaste = (event) => {
+        event.preventDefault();
+        var input = event.clipboardData.getData('Text');
+        var displayStr;
+
+        var transactionInfo = testTransactionHeader(input);
+        if(transactionInfo.type !== "UNKNOWN") {
+            this.setState({input, transactionInfo, deidDisabled: false});
+        } else {
+            this.setState({ input,  transactionInfo});
+        }
+
     
-    if(input.indexOf("<?xml") > -1) {
-       
-        //displayStr = input.replace(/\</g,"&lt;");
-        //displayStr = displayStr.replace(/\>/g,"&gt;");
-       // displayStr = '<pre lang="xml">' + displayStr + '</pre>';
-        displayStr = input;
-        LoadXMLString('displayContent', displayStr);
-     
-    } else {
-        displayStr = replaceControlCharacters(input);
-        document.getElementById('displayContent').innerHTML = displayStr;
-    }
+        if(input.indexOf("<?xml") > -1) {
+            displayStr = input;
+            if(transactionInfo.type === "UNKNOWN") {
+                // this code will display <pre> formated code, you may want this as a 
+                // toggle option
+                //displayStr = input.replace(/\</g,"&lt;");
+                //displayStr = displayStr.replace(/\>/g,"&gt;");
+                //displayStr = '<pre lang="xml">' + displayStr + '</pre>';
+                //document.getElementById('displayContent').innerHTML = displayStr;
+                LoadXMLString('displayContent', displayStr);
+            } else {
+                console.log("Now what", transactionInfo.type)
+                LoadXMLString('displayContent', displayStr);
+            }
+        
+        } else {
+            displayStr = replaceControlCharacters(input);
+            document.getElementById('displayContent').innerHTML = displayStr;
+        }
     
     //document.getElementById('displayContent').innerHTML = displayStr;
     
-    var transactionInfo = testTransactionHeader(input);
-    
-    if(transactionInfo.type !== "UNKNOWN") {
-        this.setState({input, transactionInfo, deidDisabled: false});
-    }
-    else 
-        this.setState({ input,  transactionInfo});
+        //var transactionInfo = testTransactionHeader(input);
+        
+//        if(transactionInfo.type !== "UNKNOWN") {
+//            this.setState({input, transactionInfo, deidDisabled: false});
+//        } else {
+//            this.setState({ input,  transactionInfo});
+//        }
     }
 
   render() {

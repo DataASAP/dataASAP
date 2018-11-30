@@ -1,11 +1,19 @@
 import NCPDP_D0_Config from '../configs/NCPDP_D0_Config';
 import _ from 'lodash';
+import Store from '../../main/Store';
 
 let deidentifyNCPDP_D0 = (input, transactionInfo) => {
     const { segmentSeparator, fieldSeparator, groupSeparator } = transactionInfo;
 
     var highlightedHeader = "";
     var segmentsObject = {};
+    var config;
+
+    const store = new Store({
+        configName : 'user-preferences',
+        content: {},
+        domain: "ncpdp"
+    });
 
     // remove any HTML characaters
     var stripedHtml = input.replace(/<[^>]+>/g, "");
@@ -35,9 +43,20 @@ let deidentifyNCPDP_D0 = (input, transactionInfo) => {
             segmentsObject[key] = {segments: [{segment, order: i}]};
         }
     }
+    // you need to find the config file
+    if(store.exists()) {
+        config = store.get("NCPDP_D0");
+        
+        if(config == null) {
+            config = NCPDP_D0_Config;
+        }
+
+    } else {
+        config = NCPDP_D0_Config;
+    }
     
     
-    _.forOwn(NCPDP_D0_Config, function(value, key) { 
+    _.forOwn(config, function(value, key) { 
         
         if(value.deidentify){
             var segment_1, modifiedSegment;

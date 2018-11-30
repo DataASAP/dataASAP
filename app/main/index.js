@@ -1,6 +1,7 @@
 import path from 'path';
 import { app, crashReporter, BrowserWindow, Menu, dialog, ipcMain } from 'electron';
 //import mainTemplate from './menuTemplate';
+import Store from './Store';
 
 
 const isDevelopment = process.env.NODE_ENV === 'development';
@@ -37,8 +38,8 @@ const installExtensions = async () => {
 function createConfigWindow(type) {
     console.log("Creating config window with ", type);
     configWindow = new BrowserWindow({
-        width: 1000,
-        height: 800,
+        width: 1200,
+        height: 1000,
          title: "Config Stuff"
     });
 
@@ -144,8 +145,15 @@ app.on('ready', async () => {
 });
 
 
-ipcMain.on('saveConfig', (event, content) => {
-    console.log("Saving content ", content);
+ipcMain.on('saveConfig', (event, domain, type, content) => {
+    console.log("Saving  with type ", type);
+    const store = new Store({
+        configName : 'user-preferences',
+        domain: domain,
+        content: {}
+    });
+    
+    store.set(type, content);
 });
 
 ipcMain.on('folder:open', (event, content) => {
@@ -177,7 +185,10 @@ ipcMain.on('folder:open', (event, content) => {
       });
   });
 
+/////////////////////////
+  
 
+////////////////////////
 
   const configTemplate = [
     { role: 'Close' }

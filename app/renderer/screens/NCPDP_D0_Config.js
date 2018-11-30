@@ -6,8 +6,8 @@ class NCPDP_D0_Config extends Component {
     render() {
         return (
             <Config 
-                type='NCPDP_D0' />
-            
+                type='NCPDP_D0'
+                domain="ncpdp" />
         )
     }
 }
