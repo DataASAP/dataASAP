@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import NCPDP_D0_Config from '../configs/NCPDP_D0_Config';
+import NCPDP_D0 from '../configs/NCPDP_D0_Config';
+import SCRIPT_10_6_Config from '../configs/SCRIPT_10_6_Config';
 import { Container, Segment, Accordion, Icon, 
     Table, Input,  Checkbox, Button, Message} from 'semantic-ui-react';
 import { ipcRenderer } from 'electron';
@@ -70,15 +71,16 @@ class Config extends Component {
         if(store.exists()) {
             config = store.get(this.props.type);        
             if(config == null) {
-                config = NCPDP_D0_Config;
+                config = this.props.type;
             }
         } else {
-            config = NCPDP_D0_Config;
+            console.log("Doesn't exist so use ", this.props.type);
+            config = NCPDP_D0;
         }
     }
 
     handleSaveClick = (e, content) => {
-        ipcRenderer.send('saveConfig', 'ncpdp' , this.props.type, config);
+        ipcRenderer.send('saveConfig', this.props.domain , this.props.type, config);
         this.setState({itemsToSave: false, showSaveMessage: true});
     };
 
@@ -119,7 +121,7 @@ class Config extends Component {
             ordered[key] = segments[key];
         });
 
-        
+        console.log("ordered is ", ordered);
         var header = {};
         header['HEADER'] =  ordered['HEADER'];
         delete ordered['HEADER'];

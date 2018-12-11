@@ -6,8 +6,9 @@ import thunk from 'redux-thunk';
 import user from './reducers/user';
 import userActions from './actions/user';
 
-export default function configureStore(initialState, routerHistory) {
-  const router = routerMiddleware(routerHistory);
+//export default function configureStore(initialState, routerHistory) {
+export default function configureStore(initialState) {
+  //const router = routerMiddleware(routerHistory);
 
   const actionCreators = {
     ...userActions,
@@ -19,7 +20,8 @@ export default function configureStore(initialState, routerHistory) {
     routing,
   };
 
-  const middlewares = [thunk, router];
+  //const middlewares = [thunk, router];
+  const middlewares = [thunk];
 
   const composeEnhancers = (() => {
     const compose_ = window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;

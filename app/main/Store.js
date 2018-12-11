@@ -30,7 +30,14 @@ class Store {
   get(key) {
     return this.data[key];
   }
-  
+ 
+  delete(key) {
+    console.log("Store has ", this.data)
+    delete this.data[key];
+    console.log("Store now has ", this.data)
+    fs.writeFileSync(this.path, JSON.stringify(this.data));
+  }
+
   // ...and this will set it
   set(key, value) {
     this.data[key] = value;

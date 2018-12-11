@@ -43,11 +43,11 @@ function createConfigWindow(type) {
          title: "Config Stuff"
     });
 
-    const configMenu = Menu.buildFromTemplate(configTemplate);
-    var dir = path.resolve(path.join(__dirname, '../renderer/config.html'));
+//    const configMenu = Menu.buildFromTemplate(configTemplate);
+    var page = path.resolve(path.join(__dirname, '../renderer/config.html'));
     configWindow.webContents.openDevTools();
-    configWindow.loadURL(`${dir}#/${type}`);
-    configWindow.setMenu(configMenu);
+    configWindow.loadURL(`${page}#/${type}`);
+    configWindow.setMenu(null);
 }
 
 crashReporter.start({
@@ -147,6 +147,7 @@ app.on('ready', async () => {
 
 ipcMain.on('saveConfig', (event, domain, type, content) => {
     console.log("Saving  with type ", type);
+    console.log("Saving content ", content);
     const store = new Store({
         configName : 'user-preferences',
         domain: domain,
