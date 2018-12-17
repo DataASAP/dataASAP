@@ -32,9 +32,7 @@ class Store {
   }
  
   delete(key) {
-    console.log("Store has ", this.data)
     delete this.data[key];
-    console.log("Store now has ", this.data)
     fs.writeFileSync(this.path, JSON.stringify(this.data));
   }
 

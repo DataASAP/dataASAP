@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-//import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { Form, Button, Divider, 
@@ -13,22 +12,22 @@ import restoreControlCharacters from '../services/restoreControlCharacters';
 import { ipcRenderer } from 'electron';
 
 class FileSelectScreen extends Component {
-  state = {
-    hovering: false,
-    value: '',
-    version: '',
-    inputTextArea: '',
-    input: '',
-    deidDisabled: true,
-    deidTextArea: '',
-    saveAsDisabled: true,
-    sendToDisabled: true,
-    show: 'unhide',
-    showDisplay: 'Show Changes',
-    transactionInfo: {type: "N/A", version: "N/A", transaction: "N/A", segmentSeparator: "", fieldSeparator: ""}
-  }
+    state = {
+        hovering: false,
+        value: '',
+        version: '',
+        inputTextArea: '',
+        input: '',
+        deidDisabled: true,
+        deidTextArea: '',
+        saveAsDisabled: true,
+        sendToDisabled: true,
+        show: 'unhide',
+        showDisplay: 'Show Changes',
+        transactionInfo: {type: "N/A", version: "N/A", transaction: "N/A", segmentSeparator: "", fieldSeparator: ""}
+      }
 
-     clearInputTextArea = () => {
+    clearInputTextArea = () => {
         document.getElementById('displayContent').innerHTML = '';
       this.setState({inputTextArea: '', deidDisabled: true, input: '', 
       textChanged: false, transactionInfo: {type: "N/A", version: "N/A", transaction: "N/A"}});
@@ -89,27 +88,7 @@ class FileSelectScreen extends Component {
         }
     }
 
-  /*
-  onDrop = (files) => {
-    // invalid file types are not added to files object
-    const fileList = _.map(files, ({ name, path, size, type }) => {
-      return { name, path, size, type };
-    });
-
-    if (fileList.length) {
-      this.props.addFiles(fileList);
-      
-      if (!this.props.small) {
-        this.props.history.push('/convert');
-      }
-    }
-
-  }
-*/
    copyToClipboard = () => {
-
-    // TODO: Just get what is selected
-       // sourece https://hackernoon.com/copying-text-to-clipboard-with-javascript-df4d4988697f
               
        var copyText = document.getElementById('deIDContent').textContent;
        

@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
-import ConfigReducer from './configReducer';
+import Config from './configReducer';
 import StateChanged from './stateChangedReducer';
+import UserPrefs from './userPrefsReducer';
 
 const rootReducer = combineReducers({
-    configParameters: ConfigReducer,
-    stateChanged: StateChanged
+    configParameters: Config,
+    stateChanged: StateChanged,
+    userPrefsDefined: UserPrefs
 });
 export default rootReducer;

@@ -13,7 +13,6 @@ export function setConfigParameters(type, domain, config) {
 };
 
 export function defaultValueChanged(value) {
-
     return {
         type: Types.DEFAULT_VALUE_CHANGED,
         payload:{
@@ -21,3 +20,14 @@ export function defaultValueChanged(value) {
         }
     }
 }
+
+export function setUserPrefsDefined(value) {
+
+    return {
+        type: Types.USER_PREFS_DEFINED,
+        payload:{
+            'userPrefsDefined': value
+        }
+    }
+}
+

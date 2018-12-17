@@ -1,6 +1,5 @@
 import path from 'path';
 import { app, crashReporter, BrowserWindow, Menu, dialog, ipcMain } from 'electron';
-//import mainTemplate from './menuTemplate';
 import Store from './Store';
 
 
@@ -38,12 +37,11 @@ const installExtensions = async () => {
 function createConfigWindow(type) {
     console.log("Creating config window with ", type);
     configWindow = new BrowserWindow({
-        width: 1200,
         height: 1000,
+        width: 1200,
          title: "Config Stuff"
     });
-
-//    const configMenu = Menu.buildFromTemplate(configTemplate);
+    
     var page = path.resolve(path.join(__dirname, '../renderer/config.html'));
     configWindow.webContents.openDevTools();
     configWindow.loadURL(`${page}#/${type}`);
@@ -70,15 +68,12 @@ app.on('ready', async () => {
   }
 
   mainWindow = new BrowserWindow({
-    width: 1000,
-    height: 800,
-    minWidth: 640,
-    minHeight: 480,
     show: false,
     webPreferences: {
         backgroundThrottling: false
     }
   });
+  mainWindow.maximize();
   
   const menu = Menu.buildFromTemplate(mainTemplate);
   Menu.setApplicationMenu(menu);
@@ -146,8 +141,6 @@ app.on('ready', async () => {
 
 
 ipcMain.on('saveConfig', (event, domain, type, content) => {
-    console.log("Saving  with type ", type);
-    console.log("Saving content ", content);
     const store = new Store({
         configName : 'user-preferences',
         domain: domain,
@@ -158,11 +151,9 @@ ipcMain.on('saveConfig', (event, domain, type, content) => {
 });
 
 ipcMain.on('folder:open', (event, content) => {
-    
-  
-    // WE DON"T KNOW WHAT VALUE CONTENT IS
+     
     dialog.showSaveDialog((fileName) => {
-        //http://mylifeforthecode.com/getting-started-with-standard-dialogs-in-electron/
+        // Reference: http://mylifeforthecode.com/getting-started-with-standard-dialogs-in-electron/
   
           if(fileName === undefined) {
               console.log("you did not enter a file name");
@@ -173,7 +164,7 @@ ipcMain.on('folder:open', (event, content) => {
           if(content.indexOf("?xml")> -1) {
               rawContent = content;
           } else {
-            rawContent = content.replace(/<[^>]+>/g, ""); // I think this replaces HTML tags
+            rawContent = content.replace(/<[^>]+>/g, ""); // this replaces HTML tags
           }
           
           fs.writeFile(fileName, rawContent, (error) => {  
@@ -186,14 +177,6 @@ ipcMain.on('folder:open', (event, content) => {
       });
   });
 
-/////////////////////////
-  
-
-////////////////////////
-
-  const configTemplate = [
-    { role: 'Close' }
-    ];
 
   const mainTemplate = [
     {
@@ -277,7 +260,6 @@ ipcMain.on('folder:open', (event, content) => {
 
 if (process.platform === 'darwin') {
     template.unshift({
-      //label: app.getName(),
       label: "DataASAP",
       submenu: [
         {role: 'about'},

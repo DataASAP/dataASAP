@@ -38,8 +38,6 @@ let deidentifySCRIPT_10_6 = (input, transactionInfo) => {
         const { NewRx } = jsonObj.Message.Body;
         _.forOwn(SCRIPT_10_6_Config, function(value, key) {
             if(value.deidentify){
-                // communication types can have BN|CP|FX|HP|NP|TE|WP|EM
-                
                 if(_.has(NewRx, value.location.dataElementId)) {
                     if(value.location.dataElementId === "Patient.CommunicationNumbers.Communication" ||
                         value.location.dataElementId === "Pharmacy.CommunicationNumbers.Communication" ||

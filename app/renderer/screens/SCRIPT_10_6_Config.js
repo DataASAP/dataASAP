@@ -61,14 +61,18 @@ class SCRIPT_10_6_Config extends Component {
         });
 
         // you need to find the config file
+        let userPrefsDefined = false;
         if(store.exists()) {
             config = store.get(this.props.type);        
             if(config == null) {
                 config = SCRIPT_10_6;
+            }else {
+                userPrefsDefined = true
             }
         } else {
             config = SCRIPT_10_6;
         }
+        this.props.setUserPrefsDefined(userPrefsDefined);
         this.props.setConfigParameters(this.props.type, this.props.domain, config);
     }
 
@@ -152,13 +156,11 @@ class SCRIPT_10_6_Config extends Component {
                 </div>              
             );
         });
-
     }
 
     renderChildNodes(row) {
         let index = 0;
         let nodes = row.defaultValue;
-        //console.log("Row is ", row)
         return _.map(nodes, (value, key) => {           
             return(
             <Table.Row key={index++}>

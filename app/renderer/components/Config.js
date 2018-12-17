@@ -74,7 +74,6 @@ class Config extends Component {
                 config = this.props.type;
             }
         } else {
-            console.log("Doesn't exist so use ", this.props.type);
             config = NCPDP_D0;
         }
     }

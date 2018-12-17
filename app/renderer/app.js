@@ -1,44 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-//import { ConnectedRouter } from 'react-router-redux';
-import { createMemoryHistory } from 'history';
-//import routes from './routes';
-import configureStore from './store';
 import { HashRouter as Router, Route, Switch} from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
-//import store from './reducers';
-
+import { createStore } from 'redux';
+import reducers from '../renderer/reducers';
 import Header from './components/Header';
 import FileSelectScreen from './screens/FileSelectScreen';
 
-
-
-
-const syncHistoryWithStore = (store, history) => {
-  const { routing } = store.getState();
-  if (routing && routing.location) {
-    history.replace(routing.location);
-  }
-};
-
-const initialState = {};
-const routerHistory = createMemoryHistory();
-const store = configureStore(initialState, routerHistory);
-syncHistoryWithStore(store, routerHistory);
-
+const reduxStore = createStore(reducers);
 const rootElement = document.querySelector(document.currentScript.getAttribute('data-container'));
-/*
+// The redux store can be removed here, because it is in the config.js
+// however, I think ideally it should be here??
 ReactDOM.render(
-  <Provider store={store}>
-    <ConnectedRouter history={routerHistory}>{routes}</ConnectedRouter>
-  </Provider>,
-  rootElement,
-);
-*/
-
-ReactDOM.render(
-    <Provider store={store}>
+    <Provider store={reduxStore}>
       <Router>
         <div className="app" style={{padding: '10px'}}>
         <Container fluid>
@@ -53,10 +28,4 @@ ReactDOM.render(
         </div>
       </Router>
     </Provider>, rootElement
-
   );
-
-
-
-
-

@@ -146,10 +146,6 @@ function ShowXML(xmlHolderElement,RootNode,indent)
         AddTextNode(TagEmptyElement,'>','Utility') ;
         xmlHolderElement.appendChild(TagEmptyElement);	
         SetVisibility(TagEmptyElement,false);
-    //----------------------------------------------
-    /// I Think this is the area to target; to me, this gets the initial Element setup and sets it 
-    // to clickable regardless. For me is should NOT setup a clickable for nodes with a NodeValue
-    // This creates the opening tag with attributes
     
         var TagElement = document.createElement('div');
         TagElement.className = 'Element';

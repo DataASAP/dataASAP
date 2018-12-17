@@ -7,7 +7,7 @@ import NCPDP_D0_Config from '../screens/NCPDP_D0_Config';
 import SCRIPT_10_6_Config from '../screens/SCRIPT_10_6_Config';
 import { ipcRenderer } from 'electron';
 import Store from '../../main/Store';
-
+import * as actions from '../actions';
 
 class ConfigScreens extends Component {
 
@@ -15,18 +15,22 @@ class ConfigScreens extends Component {
         super(props);
         this.state = {   
             showSaveMessage: false,
-            defaultRestored: false
+            defaultValuesRestored: false
         };
     }
 
     handleSaveClick = () => {
         const { type, domain, config } = this.props.configParameters;
         ipcRenderer.send('saveConfig', domain , type, config);
-        this.setState({itemsToSave: false, showSaveMessage: true});
+        this.props.setUserPrefsDefined(true);
+        this.setState({itemsToSave: false, showSaveMessage: true});        
     };
 
     handleOnDismiss = () => {
         this.setState({showSaveMessage: false});
+    }
+    handleOnDismissDefaultValue = () => {
+        this.setState({defaultValuesRestored: false});
     }
 
     handleClose = () => {
@@ -42,15 +46,15 @@ class ConfigScreens extends Component {
             type: ""
         });
 
-        // you need to find the config file
         if(store.exists()){
             var config = store.get(this.props.configParameters.type)
             if(config !=  null) {
                 store.delete(this.props.configParameters.type);
             }    
         }
-
-        this.setState({defaultRestored: true});
+        this.props.defaultValueChanged(false);
+        this.props.setUserPrefsDefined(false);
+        this.setState({defaultValuesRestored: true});
     }
 
 
@@ -68,8 +72,18 @@ class ConfigScreens extends Component {
                             >Save
                         </Button>
                         <Button primary floated='right' onClick={this.handleClose}>Close</Button>
-                        <Button primary floated='right' onClick={this.handleRestoreDefaults}>Restore Defaults</Button>
+                        <Button primary floated='right' 
+                            disabled={!this.props.userPrefsDefined}
+                            onClick={this.handleRestoreDefaults}>Restore Defaults</Button>
                     </Segment>
+                    {(this.state.defaultValuesRestored) ?
+                        <Message 
+                            onDismiss={this.handleOnDismissDefaultValue}
+                            positive
+                            content="Default Values have been restored" 
+                        /> : ""
+                    }
+
                     {(this.state.showSaveMessage) ?
                         <Message 
                             onDismiss={this.handleOnDismiss}
@@ -97,15 +111,15 @@ class ConfigScreens extends Component {
         </Router>
         );
     }
-
 }
 
 const mapStateToProps = (state) => {
     return {
         configParameters: state.configParameters,
-        stateChanged: state.stateChanged.configItemsChanged
+        stateChanged: state.stateChanged.configItemsChanged,
+        userPrefsDefined: state.userPrefsDefined.userPrefsDefined
     };
   };
 
-export default connect(mapStateToProps)(ConfigScreens);
+export default connect(mapStateToProps, actions)(ConfigScreens);
   

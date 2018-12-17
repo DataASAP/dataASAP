@@ -1,7 +1,7 @@
 import Types from '../actions/types';
 
 var initialState = {
-    'configItemsChanged': false
+    'userPrefsDefined': false
 }
 
 export default function(state=initialState, action) {
@@ -9,8 +9,7 @@ export default function(state=initialState, action) {
         return state;
     }
     switch(action.type){
-        case Types.DEFAULT_VALUE_CHANGED:
-        console.log("DEFAULT_VALUE_CHANGED")
+        case Types.USER_PREFS_DEFINED:
             return  action.payload;
         default:
             return state;

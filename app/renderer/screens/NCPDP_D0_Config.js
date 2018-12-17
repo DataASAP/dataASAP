@@ -56,7 +56,7 @@ class NCPDP_D0_Config extends Component {
         this.state = {
             activeIndex: 0,
             itemsToSave: false,
-            showSaveMessage: false
+            showSaveMessage: false,
         };
         // figure out what config are you modifying
         const store = new Store({
@@ -67,14 +67,18 @@ class NCPDP_D0_Config extends Component {
         });
 
         // you need to find the config file
+        let userPrefsDefined = false;
         if(store.exists()) {
             config = store.get(this.props.type);        
             if(config == null) {
                 config =  NCPDP_D0;
+            } else {
+                userPrefsDefined = true
             }
         } else {
             config = NCPDP_D0;
         }
+        this.props.setUserPrefsDefined(userPrefsDefined);
         this.props.setConfigParameters(this.props.type, this.props.domain, config);
     }
 

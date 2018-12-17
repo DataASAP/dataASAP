@@ -98,6 +98,21 @@ let parseTransactionHeader = (input) => {
                 }
             } else if (str.indexOf("hl7-org") > -1) {
                 // it's HL7
+            } else if(str.indexOf("TransactionDomain=\"SCRIPT\"") > -1) {
+                if(fastXmlParser.validate(str)=== true){
+                    var jsonObj = fastXmlParser.parse(str, xmlOptions);
+                    const {_TransactionVersion, _TransactionDomain} = jsonObj.Message.attr;
+                    type = _TransactionDomain;
+                    version = _TransactionVersion;
+                    if(jsonObj.Message.Body.hasOwnProperty("NewRx")) {
+                            transaction = "New Prescription";
+                    } else if(jsonObj.Message.Body.hasOwnProperty("Status")) {
+                        transaction = "Status";
+                    } else {
+                        console.log("XML not valid")    
+                    }
+                }
+            
             } else {
                 console.log("I don't know")
                 type = "UNKNOWN";
