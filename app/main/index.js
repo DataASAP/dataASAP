@@ -35,7 +35,6 @@ const installExtensions = async () => {
 
 
 function createConfigWindow(type) {
-    console.log("Creating config window with ", type);
     configWindow = new BrowserWindow({
         height: 1000,
         width: 1200,
@@ -43,8 +42,9 @@ function createConfigWindow(type) {
     });
     
     var page = path.resolve(path.join(__dirname, '../renderer/config.html'));
+    
     configWindow.webContents.openDevTools();
-    configWindow.loadURL(`${page}#/${type}`);
+    configWindow.loadURL(`file://${page}#/${type}`);
     configWindow.setMenu(null);
 }
 
@@ -54,6 +54,7 @@ crashReporter.start({
   submitURL: 'https://your-domain.com/url-to-submit',
   uploadToServer: false,
 });
+
 app.on('window-all-closed', () => {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
@@ -104,7 +105,7 @@ app.on('ready', async () => {
       });
       app.on('browser-window-focus', () => {
           console.log("Calling browser-window-focus");
-        createMainMenu();
+        //createMainMenu();
       });
 
       app.on('activate', () => {
@@ -259,8 +260,9 @@ ipcMain.on('folder:open', (event, content) => {
 
 
 if (process.platform === 'darwin') {
-    template.unshift({
-      label: "DataASAP",
+  const name = app.getName();
+    mainTemplate.unshift({
+      label: name,
       submenu: [
         {role: 'about'},
         {type: 'separator'},
@@ -275,7 +277,7 @@ if (process.platform === 'darwin') {
     })
   
     // Edit menu
-    template[1].submenu.push(
+    mainTemplate[1].submenu.push(
       {type: 'separator'},
       {
         label: 'Speech',
@@ -287,7 +289,7 @@ if (process.platform === 'darwin') {
     )
   
     // Window menu
-    template[3].submenu = [
+    mainTemplate[3].submenu = [
       {role: 'close'},
       {role: 'minimize'},
       {role: 'zoom'},
