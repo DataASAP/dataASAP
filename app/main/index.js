@@ -1,7 +1,7 @@
 import path from 'path';
 import { app, crashReporter, BrowserWindow, Menu, dialog, ipcMain } from 'electron';
 import Store from './Store';
-
+import replaceControlCharacters from '../renderer/services/replaceControlChars';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 const fs = require('fs');
@@ -189,30 +189,12 @@ ipcMain.on('folder:open', (event, content) => {
     {
         label: 'Edit',
         submenu: [
-            {role: 'undo'},
-            {role: 'redo'},
-            {type: 'separator'},
-            {role: 'cut'},
-            {role: 'copy'},
-            {role: 'paste'},
-            {role: 'pasteandmatchstyle'},
-            {role: 'delete'},
-            {role: 'selectall'}
-    ]
+            {role: 'paste'}    ]
     },
     {
         label: 'View',
         submenu: [
-            {role: 'reload'},
-            {role: 'forcereload'},
-            {role: 'toggledevtools'},
-            {type: 'separator'},
-            {role: 'resetzoom'},
-            {role: 'zoomin'},
-            {role: 'zoomout'},
-            {type: 'separator'},
-            {role: 'togglefullscreen'}
-        ]
+            {role: 'toggledevtools'}        ]
     },
     {
         role: 'Window',
@@ -277,22 +259,10 @@ if (process.platform === 'darwin') {
     })
   
     // Edit menu
-    mainTemplate[1].submenu.push(
-      {type: 'separator'},
-      {
-        label: 'Speech',
-        submenu: [
-          {role: 'startspeaking'},
-          {role: 'stopspeaking'}
-        ]
-      }
-    )
   
     // Window menu
     mainTemplate[3].submenu = [
       {role: 'close'},
-      {role: 'minimize'},
-      {role: 'zoom'},
       {type: 'separator'},
       {role: 'front'}
     ]

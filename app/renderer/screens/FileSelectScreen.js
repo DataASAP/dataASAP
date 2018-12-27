@@ -119,6 +119,7 @@ class FileSelectScreen extends Component {
             this.setState({ input,  transactionInfo});
         }
 
+        ipcRenderer.send('paste', input, transactionInfo);
     
         if(input.indexOf("<?xml") > -1) {
             displayStr = input;
@@ -131,7 +132,6 @@ class FileSelectScreen extends Component {
                 //document.getElementById('displayContent').innerHTML = displayStr;
                 LoadXMLString('displayContent', displayStr);
             } else {
-                console.log("Now what", transactionInfo.type)
                 LoadXMLString('displayContent', displayStr);
             }
         
@@ -139,16 +139,6 @@ class FileSelectScreen extends Component {
             displayStr = replaceControlCharacters(input);
             document.getElementById('displayContent').innerHTML = displayStr;
         }
-    
-    //document.getElementById('displayContent').innerHTML = displayStr;
-    
-        //var transactionInfo = testTransactionHeader(input);
-        
-//        if(transactionInfo.type !== "UNKNOWN") {
-//            this.setState({input, transactionInfo, deidDisabled: false});
-//        } else {
-//            this.setState({ input,  transactionInfo});
-//        }
     }
 
   render() {
