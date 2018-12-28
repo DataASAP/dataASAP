@@ -1,7 +1,6 @@
 import path from 'path';
-import { app, crashReporter, BrowserWindow, Menu, dialog, ipcMain } from 'electron';
+import { app, crashReporter, BrowserWindow, Menu, dialog, ipcMain, systemPreferences} from 'electron';
 import Store from './Store';
-import replaceControlCharacters from '../renderer/services/replaceControlChars';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 const fs = require('fs');
@@ -43,7 +42,7 @@ function createConfigWindow(type) {
     
     var page = path.resolve(path.join(__dirname, '../renderer/config.html'));
     
-    configWindow.webContents.openDevTools();
+    //configWindow.webContents.openDevTools();
     configWindow.loadURL(`file://${page}#/${type}`);
     configWindow.setMenu(null);
 }
@@ -74,6 +73,12 @@ app.on('ready', async () => {
         backgroundThrottling: false
     }
   });
+  if(process.platform === 'darwin') {
+    systemPreferences.setUserDefault('NSDisabledDictationMenuItem', 'boolean', true);
+    systemPreferences.setUserDefault('NSDisabledCharacterPaletteMenuItem', 'boolean', true);
+    console.log("User defaults are ", systemPreferences.getUserDefault());
+  }
+
   mainWindow.maximize();
   
   const menu = Menu.buildFromTemplate(mainTemplate);
@@ -192,9 +197,10 @@ ipcMain.on('folder:open', (event, content) => {
             {role: 'paste'}    ]
     },
     {
-        label: 'View',
+      label: 'View',
         submenu: [
-            {role: 'toggledevtools'}        ]
+          {role: 'toggledevtools'}
+        ]
     },
     {
         role: 'Window',
@@ -243,28 +249,32 @@ ipcMain.on('folder:open', (event, content) => {
 
 if (process.platform === 'darwin') {
   const name = app.getName();
-    mainTemplate.unshift({
-      label: name,
-      submenu: [
-        {role: 'about'},
-        {type: 'separator'},
-        {role: 'services', submenu: []},
-        {type: 'separator'},
-        {role: 'hide'},
-        {role: 'hideothers'},
-        {role: 'unhide'},
-        {type: 'separator'},
-        {role: 'quit'}
-      ]
-    })
+  
+  mainTemplate.shift(); // this removes the File Menu Item
+
+  mainTemplate.unshift({
+    label: name,
+    submenu: [
+      {role: 'about'},
+      {type: 'separator'},
+      {role: 'services', submenu: []},
+      {type: 'separator'},
+      {role: 'hide'},
+      {role: 'hideothers'},
+      {role: 'unhide'},
+      {type: 'separator'},
+      {role: 'quit'}
+    ]
+  })
   
     // Edit menu
-  
+    // View
+ 
     // Window menu
     mainTemplate[3].submenu = [
-      {role: 'close'},
-      {type: 'separator'},
-      {role: 'front'}
+      {role: 'minimize'},
+      {role: 'zoom'},
+      {type: 'separator'}
     ]
 
 }
