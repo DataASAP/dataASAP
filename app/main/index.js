@@ -66,24 +66,30 @@ app.on('ready', async () => {
   if (isDevelopment) {
     await installExtensions();
   }
-
+ 
   mainWindow = new BrowserWindow({
     show: false,
     webPreferences: {
         backgroundThrottling: false
     }
   });
+
   if(process.platform === 'darwin') {
     systemPreferences.setUserDefault('NSDisabledDictationMenuItem', 'boolean', true);
     systemPreferences.setUserDefault('NSDisabledCharacterPaletteMenuItem', 'boolean', true);
-    console.log("User defaults are ", systemPreferences.getUserDefault());
+    app.setAboutPanelOptions({
+      'applicationName':  app.getName(),
+      'applicationVersion': 'Version ' + app.getVersion(),
+      'credits': "Dave Cheli"
+    });
+
   }
 
   mainWindow.maximize();
   
   const menu = Menu.buildFromTemplate(mainTemplate);
   Menu.setApplicationMenu(menu);
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
  
   
   mainWindow.loadFile(path.resolve(path.join(__dirname, '../renderer/index.html')));
