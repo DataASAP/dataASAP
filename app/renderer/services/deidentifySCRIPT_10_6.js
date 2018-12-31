@@ -33,12 +33,16 @@ let deidentifySCRIPT_10_6 = (input, transactionInfo) => {
             xmlTag = input.substring(0, ind+1);
         }
         var jsonObj = fastXmlParser.parse(input, xmlOptions);
-
+        const rootNode = Object.keys(jsonObj.Message.Body);
+        // TODO" You need to deal with the below situations if they are not true
+        var transaction = "";
+        if (rootNode.length === 1) {
+            transaction = jsonObj.Message.Body[rootNode];
+        }
         
-        const { NewRx } = jsonObj.Message.Body;
         _.forOwn(SCRIPT_10_6_Config, function(value, key) {
             if(value.deidentify){
-                if(_.has(NewRx, value.location.dataElementId)) {
+                if(_.has(transaction, value.location.dataElementId)) {
                     if(value.location.dataElementId === "Patient.CommunicationNumbers.Communication" ||
                         value.location.dataElementId === "Pharmacy.CommunicationNumbers.Communication" ||
                         value.location.dataElementId === "Prescriber.CommunicationNumbers.Communication" ||
@@ -46,16 +50,16 @@ let deidentifySCRIPT_10_6 = (input, transactionInfo) => {
                         var comms = "";
                         switch(value.location.dataElementId) {
                             case "Patient.CommunicationNumbers.Communication":
-                                var { Communication } = NewRx.Patient.CommunicationNumbers;
+                                var { Communication } = transaction.Patient.CommunicationNumbers;
                                 break;
                             case "Pharmacy.CommunicationNumbers.Communication":
-                                var { Communication } = NewRx.Pharmacy.CommunicationNumbers;                               
+                                var { Communication } = transaction.Pharmacy.CommunicationNumbers;                               
                                 break;
                             case "Prescriber.CommunicationNumbers.Communication":
-                                var { Communication } = NewRx.Prescriber.CommunicationNumbers;
+                                var { Communication } = transaction.Prescriber.CommunicationNumbers;
                                 break;
                            case "Supervisor.CommunicationNumbers.Communication":                            
-                                var { Communication } = NewRx.Supervisor.CommunicationNumbers;            
+                                var { Communication } = transaction.Supervisor.CommunicationNumbers;            
                                 break;
                             default:
                                 break;
@@ -81,16 +85,16 @@ let deidentifySCRIPT_10_6 = (input, transactionInfo) => {
                         var ids = "";
                         switch(value.location.dataElementId) {
                             case "Patient.Identification.ID":
-                                var { ID } = NewRx.Patient.Identification;
+                                var { ID } = transaction.Patient.Identification;
                                 break;
                             case "Pharmacy.Identification.ID":
-                                var { ID } = NewRx.Pharmacy.Identification;                               
+                                var { ID } = transaction.Pharmacy.Identification;                               
                                 break;
                             case "Prescriber.Identification.ID":
-                                var { ID } = NewRx.Prescriber.Identification;
+                                var { ID } = transaction.Prescriber.Identification;
                                 break;
                             case "Supervisor.Identification.ID":                            
-                                var { ID } = NewRx.Supervisor.Identification;         
+                                var { ID } = transaction.Supervisor.Identification;         
                                 break;
                             default:
                                 break;
@@ -110,7 +114,7 @@ let deidentifySCRIPT_10_6 = (input, transactionInfo) => {
                             });
                         }
                     } else {
-                        _.set(NewRx, value.location.dataElementId, "<span class='deid' style='background-color: white;'>" + value.defaultValue + "</span>");
+                        _.set(transaction, value.location.dataElementId, "<span class='deid' style='background-color: white;'>" + value.defaultValue + "</span>");
                     }
                 }
             }
@@ -118,7 +122,7 @@ let deidentifySCRIPT_10_6 = (input, transactionInfo) => {
 
         // put back into xml
         var parser = new Parser(xmlOptions);
-        deidentifiedData = deidentifiedData = xmlTag + parser.parse(jsonObj);;
+        deidentifiedData = deidentifiedData = xmlTag + parser.parse(jsonObj);
         
     } else {
         deidentifiedData = input;

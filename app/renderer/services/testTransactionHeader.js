@@ -1,5 +1,6 @@
 import Constants from '../configs/Constants';
 import fastXmlParser from 'fast-xml-parser';
+import SCRIPTTransactionNames from '../configs/SCRIPT_Transaction_Names';
 import he from 'he';
 
 let parseTransactionHeader = (input) => {
@@ -82,16 +83,11 @@ let parseTransactionHeader = (input) => {
                     const {_version, _release} = jsonObj.Message.attr;
                     type = "SCRIPT";
                     version = _version.replace(/^0+/, '') + "." + _release.replace(/^0+/, '');
-                    if(jsonObj.Message.Body.hasOwnProperty("NewRx")) {
-                        transaction = "New Prescription";
-                    } else if(jsonObj.Message.Body.hasOwnProperty("RefillRequest")) {
-                        transaction = "Refill Request";
-                    } else if(jsonObj.Message.Body.hasOwnProperty("RefillResponse")) {
-                        transaction = "Refill Response";
-                    } else if(jsonObj.Message.Body.hasOwnProperty("RxHistoryRequest")) {
-                        transaction = "Prescription History Request";
-                    } else if(jsonObj.Message.Body.hasOwnProperty("RxHistoryResponse")) {
-                        transaction = "Prescription History Response";
+                    const rootNode = Object.keys(jsonObj.Message.Body);
+                    if (rootNode.length === 1) {
+                        transaction = SCRIPTTransactionNames[rootNode]
+                    } else {
+                        console.log("XML not valid")    
                     }
                 } else {
                    console.log("XML not valid")    
@@ -104,10 +100,9 @@ let parseTransactionHeader = (input) => {
                     const {_TransactionVersion, _TransactionDomain} = jsonObj.Message.attr;
                     type = _TransactionDomain;
                     version = _TransactionVersion;
-                    if(jsonObj.Message.Body.hasOwnProperty("NewRx")) {
-                            transaction = "New Prescription";
-                    } else if(jsonObj.Message.Body.hasOwnProperty("Status")) {
-                        transaction = "Status";
+                    const rootNode = Object.keys(jsonObj.Message.Body);
+                    if (rootNode.length === 1) {
+                        transaction = SCRIPTTransactionNames[rootNode]
                     } else {
                         console.log("XML not valid")    
                     }
