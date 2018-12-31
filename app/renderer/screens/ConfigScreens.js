@@ -5,6 +5,7 @@ import { HashRouter as Router, Route, Switch} from 'react-router-dom';
 import Header from '../components/Header';
 import NCPDP_D0_Config from '../screens/NCPDP_D0_Config';
 import SCRIPT_10_6_Config from '../screens/SCRIPT_10_6_Config';
+import SCRIPT_20170714_Config from '../screens/SCRIPT_20170714_Config';
 import { ipcRenderer } from 'electron';
 import Store from '../../main/Store';
 import * as actions from '../actions';
@@ -99,12 +100,20 @@ class ConfigScreens extends Component {
                                 domain={'ncpdp'}
                                 />}
                          />
-                        {<Route path='/SCRIPT_10_6' 
+                        <Route path='/SCRIPT_10_6' 
                             render={(props) => <SCRIPT_10_6_Config {...props}
                                 type={'SCRIPT_10_6'}
                                 domain={'ncpdp'} 
                                 />}
-                         />}
+                         />
+
+                        <Route path='/SCRIPT_20170714' 
+                            render={(props) => <SCRIPT_20170714_Config {...props}
+                                type={'SCRIPT_20170714'}
+                                domain={'ncpdp'} 
+                                />}
+                         />
+
                     </Switch>
                 </Container>
             </div>

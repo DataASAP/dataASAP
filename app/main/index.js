@@ -230,7 +230,12 @@ ipcMain.on('folder:open', (event, content) => {
                     { 
                         label: "SCRIPT 10.6",
                         click()  { createConfigWindow("SCRIPT_10_6");  }
+                    },
+                    { 
+                        label: "SCRIPT 20170714",
+                        click()  { createConfigWindow("SCRIPT_20170714");  }
                     }
+
                     ]
                 },
                 {label: "X12"},
