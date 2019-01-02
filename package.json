@@ -1,7 +1,7 @@
 {
   "name": "DataASAP",
-  "version": "0.0.0",
-  "description": "electron-react-redux-boilerplate",
+  "version": "1.0.0",
+  "description": "Tool for easily deidentifying healthcare transactions.",
   "main": "init.js",
   "author": {
     "name": "Dave Cheli",

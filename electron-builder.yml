@@ -33,5 +33,13 @@ win:
 
 linux:
   target:
-    - deb
-    - AppImage
+    - rpm
+  executeableName: 'dataasap'
+  category: 'Utility;Development'
+  packageCategory: 'Utility;Development'
+  icon: ./
+  executableName: dataasap
+  desktop:
+    StartupNotify: true
+    Keywords: 'dataasap; deidentification tool'
+
