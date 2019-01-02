@@ -1,5 +1,6 @@
 import path from 'path';
-import { app, crashReporter, BrowserWindow, Menu, dialog, ipcMain, systemPreferences} from 'electron';
+import { app, crashReporter, BrowserWindow,
+    Menu, dialog, ipcMain, systemPreferences, nativeImage} from 'electron';
 import Store from './Store';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
@@ -66,13 +67,16 @@ app.on('ready', async () => {
   if (isDevelopment) {
     await installExtensions();
   }
- 
+ console.log("dir is ", __dirname);
+  const iconImage = nativeImage.createFromPath(path.join(__dirname, '..','assets', 'icons', 'icon.png'));
   mainWindow = new BrowserWindow({
     show: false,
     webPreferences: {
         backgroundThrottling: false
-    }
+    },
+    icon: iconImage
   });
+  
 
   if(process.platform === 'darwin') {
     systemPreferences.setUserDefault('NSDisabledDictationMenuItem', 'boolean', true);
