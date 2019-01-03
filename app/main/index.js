@@ -67,13 +67,13 @@ app.on('ready', async () => {
   if (isDevelopment) {
     await installExtensions();
   }
- console.log("dir is ", __dirname);
   const iconImage = nativeImage.createFromPath(path.join(__dirname, '..','assets', 'icons', 'icon.png'));
   mainWindow = new BrowserWindow({
     show: false,
     webPreferences: {
         backgroundThrottling: false
     },
+    // Note that the icon attribute is only used in development mode
     icon: iconImage
   });
   
