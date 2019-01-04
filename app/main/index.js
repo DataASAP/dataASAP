@@ -244,10 +244,7 @@ ipcMain.on('folder:open', (event, content) => {
                     }
 
                     ]
-                },
-                {label: "X12"},
-            
-                {label: "Hl7"}
+                }
             ]
             }
         ]
