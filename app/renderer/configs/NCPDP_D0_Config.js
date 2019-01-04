@@ -63,30 +63,5 @@ const NCPDP_D0_Config = {
     "61_otherPayerCardholderId":    {"displayName": "Other Payer Cardholder ID","location": {"segment": "AM24", "dataElementId": "NU"}, "deidentify" : true, "defaultValue": "DA_OTHER PAYER ID"},    
     "62_otherPayerGroupId": {"displayName": "Other Payer Group ID","location": {"segment": "AM24", "dataElementId": "MJ"}, "deidentify" : true, "defaultValue": "DA_OTHER PAYER GROUP ID"},    
     "63_otherPayerHelpDeskPhone":   {"displayName": "Other Payer Help Desk Phone","location": {"segment": "AM24", "dataElementId": "UB"}, "deidentify" : true, "defaultValue": "7777777777"},
-    
-
-
 }
 export default NCPDP_D0_Config;
-
-/*
-
-Address (all geographic subdivisions smaller than state, including street address, city, county, or ZIP code)
-Patient Street Address 322-CM, City 323-CN, Zip Code 325-CP
-All elements (except years) of dates related to an individual (including birth date, admission date, discharge date, date of death, and exact age if over 89)
-Telephone numbers
-FAX number
-Email address
-Social Security number
-Medical record number
-Health plan beneficiary number
-Account number
-Certificate/license number
-Vehicle identifiers and serial numbers, including license plate numbers
-Device identifiers or serial numbers
-Web URLs
-IP address
-Biometric identifiers, including finger or voice prints
-Full-face photographic images and any comparable images
-Any other unique identifying number, characteristic, or code
-*/

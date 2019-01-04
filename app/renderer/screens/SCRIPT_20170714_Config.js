@@ -92,7 +92,7 @@ class SCRIPT_20170714_Config extends Component {
         const newIndex = activeInnerIndex === index ? -1 : index;
         this.setState({ activeInnerIndex: newIndex })
     }
-
+ 
     renderAccordion() {
         var nodes = _.groupBy(config, 'location.node');
         var index = 0;
@@ -111,7 +111,7 @@ class SCRIPT_20170714_Config extends Component {
                         <Table>
                             <Table.Header>
                                 <Table.Row>
-                                    <Table.HeaderCell>Data Element</Table.HeaderCell>
+                                    <Table.HeaderCell colSpan='3'>Data Element</Table.HeaderCell>
                                     <Table.HeaderCell>Deidentify</Table.HeaderCell>
                                     <Table.HeaderCell>Default Value</Table.HeaderCell>
                                 </Table.Row>
@@ -126,85 +126,65 @@ class SCRIPT_20170714_Config extends Component {
         });
     }
 
-    renderChildNodes(row) {
-        let index = 0;
-        let nodes = row.defaultValue;
-        return _.map(nodes, (value, key) => {           
-            return(
-            <Table.Row key={index++}>
-                <Table.Cell colSpan='3'>{qualifierNames[key]} - {key}</Table.Cell>
-                <Table.Cell ></Table.Cell>
-                <Table.Cell><Input
-                    name={row.displayName}
-                    onChange={this.handleOnChangeNodeDefaultValue} 
-                    defaultValue={value}
-                    qualifier={key}
-                    /></Table.Cell>
-            </Table.Row>)
-        });
-    }
+
+
 
     renderRows(rows) {
+        var secondaryNodeGroups = _.groupBy(rows, 'location.secondaryNode');
         let index = 0;
         let innerIndex = 0;
-        return _.map(rows, row => {
+
+        return _.map(secondaryNodeGroups, (row, key) => {
             innerIndex++;
-            if(typeof row.defaultValue === "object"){
+            if(key !== "") {
                 return(
                     <Table.Row key={index++}>
-                        <Table.Cell  colSpan='3'>
-                        <Accordion fluid>
-
-                            <Accordion.Title 
-                                active={this.state.activeInnerIndex === innerIndex}
-                                index={innerIndex}
-                                onClick={this.handleInnerClick}>
-                                <Icon name='dropdown'  />
-                                {row.displayName}
-                            </Accordion.Title>
-                            <Accordion.Content
-                                index={innerIndex}
-                                active={this.state.activeInnerIndex === innerIndex}>
-                                <Table>
-                                <Table.Header>
-                                <Table.Row>
-                                    <Table.HeaderCell colSpan='3'>Description</Table.HeaderCell>
-                                    <Table.HeaderCell>
-                                        Deidentify
-                                        <Checkbox className='radio'
-                                            label='Yes'
-                                            name={row.displayName}
-                                            value='true'
-                                            checked={row.deidentify == true}
-                                            onChange={this.handleOnChangeDeid }
-                                            style={{'padding':5}}/>
-                                        <Checkbox className='radio'
-                                            label='No'
-                                            name={row.displayName}
-                                            value='false'
-                                            checked={row.deidentify == false} 
-                                            onChange={this.handleOnChangeDeid}/>
-                                    </Table.HeaderCell>
-                                    
-                                    <Table.HeaderCell colSpan='2'>Default Value</Table.HeaderCell>
-                                </Table.Row>
-                            </Table.Header>
-                            <Table.Body>
-                            {this.renderChildNodes(row)}
-                            </Table.Body>
-                                </Table>
-                            </Accordion.Content>
-                        </Accordion>
-  
+                        <Table.Cell  colSpan='5'>
+                            <Accordion fluid>
+                                <Accordion.Title 
+                                    active={this.state.activeInnerIndex === innerIndex}
+                                    index={innerIndex}
+                                    onClick={this.handleInnerClick}>
+                                    <Icon name='dropdown'  />
+                                    {key}
+                                </Accordion.Title>
+                                <Accordion.Content 
+                                    index={innerIndex}
+                                    active={this.state.activeInnerIndex === innerIndex}>
+                                    <Table>
+                                    <Table.Header>
+                                        <Table.Row>
+                                            <Table.HeaderCell colSpan='3'>Data Element</Table.HeaderCell>
+                                            <Table.HeaderCell>Deidentify</Table.HeaderCell>
+                                            <Table.HeaderCell>Default Value</Table.HeaderCell>
+                                    </Table.Row>
+                                    </Table.Header>
+                                    <Table.Body>
+                                        {this.renderChildNodes(row)}
+                                    </Table.Body>
+                                    </Table>
+                                </Accordion.Content>
+                            </Accordion>
                         </Table.Cell>
                     </Table.Row>
+                );
+            } else {
+                
+                return (
+                    this.renderChildNodes(row)
                 )
-            }            
- 
+            }
+        });  
+    }
+
+
+    renderChildNodes(rows) {
+        let index = 0;
+        return _.map(rows, (row, key) => {           
             return(
             <Table.Row key={index++}>
-                <Table.Cell>{row.displayName}</Table.Cell>
-                <Table.Cell>
+                <Table.Cell colSpan='3'>{row.displayName}</Table.Cell>
+                <Table.Cell >
                     <Checkbox className='radio'
                         label='Yes'
                         name={row.displayName}
@@ -218,17 +198,17 @@ class SCRIPT_20170714_Config extends Component {
                         value='false'
                         checked={row.deidentify == false} 
                         onChange={this.handleOnChangeDeid}/>
-                    </Table.Cell>
-                <Table.Cell>
-                    <Input 
-                        name={row.displayName} 
-                        onChange={this.handleOnChangeDefaultValue} 
-                        defaultValue={row.defaultValue}/>
                 </Table.Cell>
-            </Table.Row>
-            )
-        });   
+                <Table.Cell><Input
+                    name={row.displayName}
+                    onChange={this.handleOnChangeNodeDefaultValue} 
+                    defaultValue={row.defaultValue}
+                    qualifier={key}
+                    /></Table.Cell>
+            </Table.Row>)
+        });
     }
+
 
     render() {
         return (
