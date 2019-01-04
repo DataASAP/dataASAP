@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Segment, Message, Button } from 'semantic-ui-react';
+import { Container, Segment, Message, Button, Label, Icon } from 'semantic-ui-react';
 import { HashRouter as Router, Route, Switch} from 'react-router-dom';
 import Header from '../components/Header';
 import NCPDP_D0_Config from '../screens/NCPDP_D0_Config';
@@ -66,16 +66,49 @@ class ConfigScreens extends Component {
                 <Container >
                     <Header />
                     <Segment clearing >
-                        <Button primary 
-                            disabled={!this.props.stateChanged}
-                            floated='right' 
-                            onClick={this.handleSaveClick}
-                            >Save
-                        </Button>
-                        <Button primary floated='right' onClick={this.handleClose}>Close</Button>
-                        <Button primary floated='right' 
-                            disabled={!this.props.userPrefsDefined}
-                            onClick={this.handleRestoreDefaults}>Restore Defaults</Button>
+
+                    <Button.Group floated='right'>
+
+                        {this.props.stateChanged ? 
+                        <Label onClick={this.handleSaveClick} 
+                            style={{cursor: 'pointer'}}
+                            size='big'>
+                            <Icon name='save'
+                            />Save Changes
+                        </Label> :
+                        <Label 
+                            style={{cursor: 'not-allowed'}}
+                            size='big'>
+                            <Icon name='save'
+                            />Save Changes
+                        </Label> 
+                        }
+
+
+                        <Label onClick={this.handleClose} 
+                            style={{cursor: 'pointer'}}
+                            size='big'>
+                            <Icon name='close' 
+                            />&nbsp; &nbsp; Close Window
+                        </Label>
+
+                        {this.props.userPrefsDefined ? 
+                        <Label onClick={this.handleRestoreDefaults} 
+                            style={{cursor: 'pointer'}}
+                            size='big'>
+                            <Icon name='undo'
+                            />Restore Defaults
+                        </Label> :
+                        <Label 
+                            style={{cursor: 'not-allowed'}}
+                            size='big'>
+                            <Icon name='undo'
+                            />Restore Defaults
+                        </Label>
+                        }
+
+
+                            </Button.Group>
                     </Segment>
                     {(this.state.defaultValuesRestored) ?
                         <Message 

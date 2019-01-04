@@ -35,10 +35,13 @@ const installExtensions = async () => {
 
 
 function createConfigWindow(type) {
+    const iconImage = nativeImage.createFromPath(path.join(__dirname, '..','assets', 'icons', 'icon.png'));
     configWindow = new BrowserWindow({
         height: 1000,
         width: 1200,
-         title: "Config Stuff"
+        title: "Config Stuff",
+        // Note that the icon attribute is only used in development mode
+        icon: iconImage
     });
     
     var page = path.resolve(path.join(__dirname, '../renderer/config.html'));

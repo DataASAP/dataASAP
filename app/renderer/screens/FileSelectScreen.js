@@ -162,6 +162,29 @@ class FileSelectScreen extends Component {
             <Segment>
                 <Form>
                     <Label size='big' pointing='below'>Paste Data Here</Label>
+                    <Button.Group floated='right'>
+                        {this.state.deidDisabled ? 
+                        <Label 
+                            style={{cursor: 'not-allowed'}}
+                            size='big'>
+                            <Icon name='forward'
+                            />De-Identify
+                        </Label> :
+                        <Label onClick={this.deidentifyData}
+                            style={{cursor: 'pointer'}}
+                            size='big'>
+                            <Icon name='forward'
+                            />De-Identify 
+                        </Label>
+                        }
+                        <Label  onClick={this.clearInputTextArea} 
+                            style={{cursor: 'pointer'}}
+                            size='big'>
+                            <Icon name='trash alternate'
+                            />Clear 
+                        </Label>
+                    </Button.Group>
+
                    <div contentEditable
                         id="displayContent"
                         onPaste={this.divPaste}
@@ -176,10 +199,6 @@ class FileSelectScreen extends Component {
                         
                         </div>
                                             
-                    <Segment basic floated="right" clearing>
-                        <Button primary  content="Clear" onClick={this.clearInputTextArea} />
-                        <Button primary  content="De-Identify" disabled={this.state.deidDisabled} onClick={this.deidentifyData} />
-                    </Segment>
                 </Form>
             </Segment>
             <Divider horizontal /> 
@@ -188,18 +207,42 @@ class FileSelectScreen extends Component {
             <Divider horizontal /> 
 
             <Segment>
-                    <Form>
-                        <Label size='big' pointing='below'>De-Identified Data</Label>
-                       <Label as='a' onClick={this.copyToClipboard} size='big'>
+                <Form>
+                    
+                    <Label size='big' pointing='below'>De-Identified Data</Label>
+                    <Label as='a' onClick={this.copyToClipboard} size='big'>
                         <Icon name='clipboard' 
                         />Copy to Clipboard
+                    </Label>
+                    <Label as='a' onClick={this.showChanges} size='big'>
+                            <Icon name={this.state.show} 
+                            />{this.state.showDisplay}
+                    </Label>
+
+                    <Button.Group floated='right'>
+
+                        {this.state.saveAsDisabled ? 
+                        <Label 
+                            style={{cursor: 'not-allowed'}}
+                            size='big'>
+                            <Icon name='save'
+                            />Save As... 
+                        </Label> :
+                        <Label onClick={this.saveFile} 
+                            style={{cursor: 'pointer'}}
+                            size='big'>
+                            <Icon name='save'
+                            />Save As... 
                         </Label>
-    
-                       <Label as='a' onClick={this.showChanges} size='big'>
-                        <Icon name={this.state.show} 
-                        />{this.state.showDisplay}
-                       </Label>
-    
+                        }
+                        <Label onClick={this.clearDeidTextArea} 
+                            style={{cursor: 'pointer'}}
+                            size='big'>
+                            <Icon name='trash alternate'
+                            />Clear 
+                        </Label>
+                    </Button.Group>
+                    
                     <div 
                         id="deIDContent"
                         onCopy={this.copyToClipboard}
@@ -212,12 +255,6 @@ class FileSelectScreen extends Component {
                             overflowY: 'scroll'}}>    
                     </div>
                     
-                    <Segment basic floated="right" clearing>
-                        <Button primary  content="Clear" onClick={this.clearDeidTextArea} />
-                        <Button primary  content="Save As..." 
-                            onClick={this.saveFile} 
-                            disabled={this.state.saveAsDisabled}  />
-                   </Segment>
                     </Form>
             </Segment>
                 
