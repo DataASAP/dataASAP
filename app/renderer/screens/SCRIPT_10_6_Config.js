@@ -8,7 +8,6 @@ import Store from '../../main/Store';
 import * as actions from '../actions';
 
 const qualifierNames = {
-    "94": "File ID",
     "BN": "Beeper",
     "CP": "Cellular",
     "EM": "Electronic Mail",
@@ -17,6 +16,7 @@ const qualifierNames = {
     "NP": "Night",
     "TE": "Telephone",
     "WP": "Work",
+    "94": "File ID",
     "0B": "State License Number",
     "1C": "Medicare Number",
     "1D": "Medicaid Number",
@@ -31,13 +31,13 @@ const qualifierNames = {
     "DH": "DEA NUmber",
     "GI": "Certificate to Prescribe",
     "HI": "Health Identification Number",
-    "HPI": "National Provider ID",
+    "HPI": "NPI",
     "NF": "NAIC Code",
     "SY": "Social Security Number",
     "UU": "Health Plan Identifier",
     "WI": "Waiver ID",
-    "ZZ": "Mutually Defined"
-
+    "ZZ": "Mutually Defined",
+    "WI": "Data 2000 Waiver ID"
 }
 
 var config;
@@ -158,35 +158,19 @@ class SCRIPT_10_6_Config extends Component {
         });
     }
 
-    renderChildNodes(row) {
-        let index = 0;
-        let nodes = row.defaultValue;
-        return _.map(nodes, (value, key) => {           
-            return(
-            <Table.Row key={index++}>
-                <Table.Cell colSpan='3'>{qualifierNames[key]} - {key}</Table.Cell>
-                <Table.Cell ></Table.Cell>
-                <Table.Cell><Input
-                    name={row.displayName}
-                    onChange={this.handleOnChangeNodeDefaultValue} 
-                    defaultValue={value}
-                    qualifier={key}
-                    /></Table.Cell>
-            </Table.Row>)
-        });
-    }
+ 
 
     renderRows(rows) {
         let index = 0;
         let innerIndex = 0;
-        return _.map(rows, row => {
+        var orderedRows = _.orderBy(rows, ['displayOrder']);
+        return _.map(orderedRows, row => {
             innerIndex++;
             if(typeof row.defaultValue === "object"){
                 return(
                     <Table.Row key={index++}>
                         <Table.Cell  colSpan='3'>
                         <Accordion fluid>
-
                             <Accordion.Title 
                                 active={this.state.activeInnerIndex === innerIndex}
                                 index={innerIndex}
@@ -262,6 +246,24 @@ class SCRIPT_10_6_Config extends Component {
         });   
     }
 
+
+    renderChildNodes(row) {
+        let index = 0;
+        let nodes = row.defaultValue;
+        return _.map(nodes, (value, key) => {           
+            return(
+            <Table.Row key={index++}>
+                <Table.Cell colSpan='3'>{qualifierNames[key]} - {key}</Table.Cell>
+                <Table.Cell ></Table.Cell>
+                <Table.Cell><Input
+                    name={row.displayName}
+                    onChange={this.handleOnChangeNodeDefaultValue} 
+                    defaultValue={value}
+                    qualifier={key}
+                    /></Table.Cell>
+            </Table.Row>)
+        });
+    }
     render() {
         return (
             <Container>

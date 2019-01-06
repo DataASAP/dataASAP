@@ -96,7 +96,7 @@ class SCRIPT_20170714_Config extends Component {
     renderAccordion() {
         var nodes = _.groupBy(config, 'location.node');
         var index = 0;
-        return _.map(nodes, (value, key) => {
+        return _.map(nodes, (rows, key) => {
             return (
                 <div key={index++}>
                     <Accordion.Title 
@@ -117,7 +117,7 @@ class SCRIPT_20170714_Config extends Component {
                                 </Table.Row>
                             </Table.Header>
                             <Table.Body>
-                            {this.renderRows(value)}
+                            {this.renderRows(rows)}
                             </Table.Body>
                         </Table>  
                     </Accordion.Content>
@@ -180,7 +180,8 @@ class SCRIPT_20170714_Config extends Component {
 
     renderChildNodes(rows) {
         let index = 0;
-        return _.map(rows, (row, key) => {           
+        var orderedRows = _.orderBy(rows, ['displayOrder']);
+        return _.map(orderedRows, (row, key) => {           
             return(
             <Table.Row key={index++}>
                 <Table.Cell colSpan='3'>{row.displayName}</Table.Cell>

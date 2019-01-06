@@ -125,7 +125,7 @@ class NCPDP_D0_Config extends Component {
 
         var index = 0;
  
-        return _.map(merged, (value, key) => {
+        return _.map(merged, (rows, key) => {
             return (
                 <div key={index}>
                     <Accordion.Title 
@@ -149,7 +149,7 @@ class NCPDP_D0_Config extends Component {
                                 </Table.Row>
                             </Table.Header>
                             <Table.Body>
-                            {this.renderRows(value)}
+                            {this.renderRows(rows)}
                             </Table.Body>
                         </Table>  
                     </Accordion.Content>
@@ -160,7 +160,9 @@ class NCPDP_D0_Config extends Component {
 
     renderRows(rows) {
         let index = 0;
-        return _.map(rows, row => {           
+        var orderedRows = _.orderBy(rows, ['displayOrder']);
+
+        return _.map(orderedRows, row => {           
             return(
             <Table.Row key={index++}>
                 <Table.Cell>{row.displayName} - ({row.location.dataElementId})</Table.Cell>
