@@ -182,7 +182,8 @@ class NCPDP_D0_Config extends Component {
                         onChange={this.handleOnChangeDeid}/>
                     </Table.Cell>
                 <Table.Cell>
-                    <Input 
+                    <Input
+                        style={{ width: '300px'}} 
                         name={row.displayName} 
                         onChange={this.handleOnChangeDefaultValue} 
                         defaultValue={row.defaultValue}/>

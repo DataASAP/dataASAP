@@ -28,7 +28,7 @@ const qualifierNames = {
     "EA": "Meidcal Record Identification Number",
     "EJ": "Patient Account Number",
     "D3": "NCPDP ID",
-    "DH": "DEA NUmber",
+    "DH": "DEA Number",
     "GI": "Certificate to Prescribe",
     "HI": "Health Identification Number",
     "HPI": "NPI",
@@ -125,10 +125,17 @@ class SCRIPT_10_6_Config extends Component {
         this.setState({ activeInnerIndex: newIndex })
     }
 
-    renderAccordion() {
+    renderAccordion() { 
         var nodes = _.groupBy(config, 'location.node');
+
+        var header = {};
+        header['Header'] =  nodes['Header'];
+        delete nodes['Header'];
+        let merged = {...header, ...nodes};
         var index = 0;
-        return _.map(nodes, (value, key) => {
+
+
+        return _.map(merged, (value, key) => {
             return (
                 <div key={index++}>
                     <Accordion.Title 
@@ -237,6 +244,7 @@ class SCRIPT_10_6_Config extends Component {
                     </Table.Cell>
                 <Table.Cell>
                     <Input 
+                        style={{ width:'300px'}}
                         name={row.displayName} 
                         onChange={this.handleOnChangeDefaultValue} 
                         defaultValue={row.defaultValue}/>

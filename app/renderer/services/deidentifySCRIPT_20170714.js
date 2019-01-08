@@ -4,6 +4,7 @@ var Parser = require("fast-xml-parser").j2xParser;
 import _ from 'lodash';
 import he from 'he';
 import Store from '../../main/Store';
+const storeName = "SCRIPT_20170714";
 
 let deidentifySCRIPT_20170714 = (input, transactionInfo) => {
 
@@ -25,7 +26,6 @@ let deidentifySCRIPT_20170714 = (input, transactionInfo) => {
         tagValueProcessor : a => he.decode(a) //default is a=>a
     };
 
-
     var config;
 
     const store = new Store({
@@ -42,25 +42,50 @@ let deidentifySCRIPT_20170714 = (input, transactionInfo) => {
             xmlTag = input.substring(0, ind+1);
         }
         var jsonObj = fastXmlParser.parse(input, xmlOptions);
+        var header= fastXmlParser.parse(input, xmlOptions);
+
         // you have to deal with the below
-        const rootNode = Object.keys(jsonObj.Message.Body);
+        const headerNode = jsonObj.Message.Header;
+    
+        console.log("header is ", header);
+        const bodyNode = Object.keys(jsonObj.Message.Body);
         var transaction = "";
-        if (rootNode.length === 1) {
-            transaction = jsonObj.Message.Body[rootNode];
+        if (bodyNode.length === 1) {
+            transaction = jsonObj.Message.Body[bodyNode];
         }
 
         config = SCRIPT_20170714_Config;
         // you need to find the config file in the store
 
-        if(store.exists() && store.get("SCRIPT_20170714") != null) {
-            config = store.get("SCRIPT_20170714");
+        if(store.exists() && store.get(storeName) != null) {
+            config = store.get(storeName);
         } 
-
         _.forOwn(config, function(value, key) {
             if(value.deidentify){
+                var node;
                 if(_.has(transaction, value.location.dataElementId)) {
-                    _.set(transaction, value.location.dataElementId, "<span class='deid' style='background-color: white;'>" + value.defaultValue + "</span>");
+                    node = transaction[value.location.dataElementId];
+                    // the below check is needed to determin if the node contains attributes, if it does
+                    // you just want to update the #text component
+                    if(typeof(node) === 'object') {
+                        _.set(node, '#text', "<span class='deid' style='background-color: white;'>" + value.defaultValue.substring(0,value.maxFieldLength) + "</span>");
+                        _.set(transaction, value.location.dataElementId, node);                        
+                    } else {
+                        _.set(transaction, value.location.dataElementId, "<span class='deid' style='background-color: white;'>" + value.defaultValue.substring(0,value.maxFieldLength) + "</span>");                        
+                    }
+                
+                } else if(_.has(headerNode, value.location.dataElementId)) {
+                    node = headerNode[value.location.dataElementId];
+                    
+                    if(typeof(node) === 'object') {
+                        _.set(node, '#text', "<span class='deid' style='background-color: white;'>" + value.defaultValue.substring(0,value.maxFieldLength) + "</span>");
+                        _.set(headerNode, value.location.dataElementId, node);
+                    } else {
+                        _.set(headerNode, value.location.dataElementId, "<span class='deid' style='background-color: white;'>" + value.defaultValue.substring(0,value.maxFieldLength) + "</span>");
+                    }
+
                 }
+
             }
         });
 

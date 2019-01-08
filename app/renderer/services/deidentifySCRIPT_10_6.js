@@ -33,14 +33,15 @@ let deidentifySCRIPT_10_6 = (input, transactionInfo) => {
             xmlTag = input.substring(0, ind+1);
         }
         var jsonObj = fastXmlParser.parse(input, xmlOptions);
-        const rootNode = Object.keys(jsonObj.Message.Body);
-        // TODO" You need to deal with the below situations if they are not true
+        const bodyNode = Object.keys(jsonObj.Message.Body);        
+        const headerNode = jsonObj.Message.Header;
         var transaction = "";
-        if (rootNode.length === 1) {
-            transaction = jsonObj.Message.Body[rootNode];
+        if (bodyNode.length === 1) {
+            transaction = jsonObj.Message.Body[bodyNode];
         }
-        
+
         _.forOwn(SCRIPT_10_6_Config, function(value, key) {
+            var node;
             if(value.deidentify){
                 if(_.has(transaction, value.location.dataElementId)) {
                     if(value.location.dataElementId === "Patient.CommunicationNumbers.Communication" ||
@@ -73,7 +74,7 @@ let deidentifySCRIPT_10_6 = (input, transactionInfo) => {
                             }
                             _.forEach(comms, function(cValue, cKey) {
                                 if(value.defaultValue.hasOwnProperty(cValue.Qualifier)){
-                                    var newNumber = value.defaultValue[cValue.Qualifier];
+                                    var newNumber = value.defaultValue[cValue.Qualifier].substring(0, value.maxFieldLength);
                                     cValue.Number = "<span class='deid' style='background-color: white;'>" + newNumber + "</span>";
                                 }
                             });
@@ -108,13 +109,29 @@ let deidentifySCRIPT_10_6 = (input, transactionInfo) => {
                             }       
                             _.forOwn(ids, function(cValue, cKey) {
                                 if(value.defaultValue.hasOwnProperty(cValue.IDQualifier)){
-                                    var newNumber = value.defaultValue[cValue.IDQualifier];
+                                    var newNumber = value.defaultValue[cValue.IDQualifier].substring(0, value.maxFieldLength);
                                     cValue.IDValue = "<span class='deid' style='background-color: white;'>" + newNumber  + "</span>";
                                 }
                             });
                         }
                     } else {
-                        _.set(transaction, value.location.dataElementId, "<span class='deid' style='background-color: white;'>" + value.defaultValue + "</span>");
+                        node = transaction[value.location.dataElementId];
+                        // the below check is needed to determin if the node contains attributes, if it does
+                        // you just want to update the #text component
+                        if(typeof(node) === 'object') {
+                            _.set(node, '#text', "<span class='deid' style='background-color: white;'>" + value.defaultValue.substring(0,value.maxFieldLength) + "</span>");
+                            _.set(transaction, value.location.dataElementId, node);                        
+                        } else {
+                            _.set(transaction, value.location.dataElementId, "<span class='deid' style='background-color: white;'>" + value.defaultValue.substring(0,value.maxFieldLength) + "</span>");                        
+                        }    
+                    }
+                } else if(_.has(headerNode, value.location.dataElementId)) {
+                    node = headerNode[value.location.dataElementId];
+                    if(typeof(node) === 'object') {
+                        _.set(node, '#text', "<span class='deid' style='background-color: white;'>" + value.defaultValue.substring(0,value.maxFieldLength) + "</span>");
+                        _.set(headerNode, value.location.dataElementId, node);
+                    } else {
+                        _.set(headerNode, value.location.dataElementId, "<span class='deid' style='background-color: white;'>" + value.defaultValue.substring(0,value.maxFieldLength) + "</span>");
                     }
                 }
             }

@@ -95,8 +95,14 @@ class SCRIPT_20170714_Config extends Component {
  
     renderAccordion() {
         var nodes = _.groupBy(config, 'location.node');
+
+        var header = {};
+        header['Header'] =  nodes['Header'];
+        delete nodes['Header'];
+        let merged = {...header, ...nodes};
+
         var index = 0;
-        return _.map(nodes, (rows, key) => {
+        return _.map(merged, (rows, key) => {
             return (
                 <div key={index++}>
                     <Accordion.Title 
@@ -201,6 +207,7 @@ class SCRIPT_20170714_Config extends Component {
                         onChange={this.handleOnChangeDeid}/>
                 </Table.Cell>
                 <Table.Cell><Input
+                    style={{width:'300px'}}
                     name={row.displayName}
                     onChange={this.handleOnChangeNodeDefaultValue} 
                     defaultValue={row.defaultValue}
