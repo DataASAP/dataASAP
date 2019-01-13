@@ -63,5 +63,6 @@ const NCPDP_D0_Config = {
     "62_otherPayerCardholderId":    {"displayOrder" : 62, "displayName": "Other Payer Cardholder ID","location": {"segment": "AM24", "dataElementId": "NU"}, "deidentify" : true, "defaultValue": "OTHER CARHHOLDER ID"},    
     "63_otherPayerGroupId": {"displayOrder" : 63, "displayName": "Other Payer Group ID","location": {"segment": "AM24", "dataElementId": "MJ"}, "deidentify" : true, "defaultValue": "OTHER PAYER GROUP ID"},    
     "64_otherPayerHelpDeskPhone":   {"displayOrder" : 64, "displayName": "Other Payer Help Desk Phone","location": {"segment": "AM24", "dataElementId": "UB"}, "deidentify" : true, "defaultValue": "7777777777"},
+    "65_authorizationNumber" : {"displayOrder" : 64, "displayName": "Authorization Number","location": {"segment": "AM21", "dataElementId": "F3"}, "deidentify" : true, "defaultValue": "AUTHORIZATION NUMBER"},
 }
 export default NCPDP_D0_Config;

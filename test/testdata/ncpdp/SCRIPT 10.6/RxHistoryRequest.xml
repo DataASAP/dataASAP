@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<Message xmlns="http://www.ncpdp.org/schema/SCRIPT" version="010" release="006" >
+    <Header>
+        <To Qualifier="ZZZ">XYZ01928376544</To>
+        <From Qualifier="ZZZ">PDQ87654321</From>
+        <MessageID>ABC-01982</MessageID>
+        <RelatesToMessageID>2</RelatesToMessageID>
+        <SentTime>2018-11-27T12:18:00</SentTime>
+        <Security>
+            <UsernameToken />
+            <Sender>
+                <SecondaryIdentification>PASSWORD</SecondaryIdentification>
+            </Sender>
+            <Receiver>
+                <SecondaryIdentification />
+            </Receiver>
+        </Security>
+        <TestMessage>1</TestMessage>
+        <RxReferenceNumber />
+        <PrescriberOrderNumber />
+    </Header>
+    <Body>
+        <RxHistoryRequest>
+            <Prescriber>
+                <Identification>
+                    <ID>
+                        <IDValue>1111111111</IDValue>
+                        <IDQualifier>HPI</IDQualifier>
+                    </ID>
+                    <ID>
+                        <IDValue>DE0000</IDValue>
+                        <IDQualifier>0B</IDQualifier>
+                    </ID>
+                </Identification>
+                <Name>
+                    <LastName>DOE</LastName>
+                    <FirstName>JACK</FirstName>
+                </Name>
+                <CommunicationNumbers>
+                    <Communication>
+                        <Number>5554440909</Number>
+                        <Qualifier>TE</Qualifier>
+                    </Communication>
+                </CommunicationNumbers>
+            </Prescriber>
+            <Patient>
+                <Identification>
+                    <ID>
+                        <IDValue>666886666</IDValue>
+                        <IDQualifier>SY</IDQualifier>
+                    </ID>
+                </Identification>
+                <Name>
+                    <LastName>Doe</LastName>
+                    <FirstName>Dean</FirstName>
+                </Name>
+                <Gender>M</Gender>
+                <DateOfBirth>
+                    <Date>1900-03-18</Date>
+                </DateOfBirth>
+                <Address>
+                    <ZipCode>00100</ZipCode>
+                </Address>
+            </Patient>
+            <BenefitsCoordination>
+                <PayerIdentification>
+                    <ID>
+                        <IDValue>PBMPAYER</IDValue>
+                        <IDQualifier>2U</IDQualifier>
+                    </ID>
+                </PayerIdentification>
+                <PayerName>PBM Co</PayerName>
+                <CardholderID>SAMPLEID</CardholderID>
+                <ResponsibileParty>
+                    <LastName>Rutherford</LastName>
+                </ResponsibileParty>
+                <GroupID>SAMPLEGROUPID</GroupID>
+                <EffectiveDate>
+                    <Date>2018-11-26</Date>
+                </EffectiveDate>
+                <ExpirationDate>
+                    <Date>2018-11-27</Date>
+                </ExpirationDate>
+                <Consent>Y</Consent>
+                <PBMMemberID>MEMBERID</PBMMemberID>
+            </BenefitsCoordination>
+       </RxHistoryRequest>
+    </Body>
+</Message>

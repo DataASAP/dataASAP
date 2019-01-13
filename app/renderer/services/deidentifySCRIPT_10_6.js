@@ -39,21 +39,114 @@ let deidentifySCRIPT_10_6 = (input, transactionInfo) => {
         if (bodyNode.length === 1) {
             transaction = jsonObj.Message.Body[bodyNode];
         }
+ 
+        function deid(dataset) {
+            var node;
+            _.forOwn(SCRIPT_10_6_Config, function(value, key) {
+                if(value.deidentify){
+                
+                    if(_.has(dataset, value.location.dataElementId)) {
+                        if(value.location.dataElementId === "MedicationDispensed.Pharmacy.CommunicationNumbers.Communication" ||
+                            value.location.dataElementId === "MedicationDispensed.Prescriber.CommunicationNumbers.Communication" ) { 
+                                var comms = "";
+                                switch(value.location.dataElementId) {
+                                    case "MedicationDispensed.Pharmacy.CommunicationNumbers.Communication":
+                                    var { Communication } = dataset.MedicationDispensed.Pharmacy.CommunicationNumbers;                             
+                                    break;
+
+                                    case "MedicationDispensed.Prescriber.CommunicationNumbers.Communication":
+                                        var { Communication } = dataset.MedicationDispensed.Prescriber.CommunicationNumbers;           
+                                        break;
+                                    default:
+                                        break;
+                                }
+
+                                if(Communication !== "" && Communication.hasOwnProperty('length')) {
+                                    comms = Communication;
+                                } else {
+                                    comms = new Array(Communication);
+                                }
+                                _.forEach(comms, function(cValue, cKey) {
+                                    if(value.defaultValue.hasOwnProperty(cValue.Qualifier)){
+                                        var newNumber = value.defaultValue[cValue.Qualifier].substring(0, value.maxFieldLength);
+                                        cValue.Number = "<span class='deid' style='background-color: white;'>" + newNumber + "</span>";
+                                    }
+                                });
+                                
+                        } else if(value.location.dataElementId === "MedicationDispensed.Pharmacy.Identification.ID" ||
+                            value.location.dataElementId === "MedicationDispensed.Prescriber.Identification.ID") { 
+                            var ids = "";
+                            switch(value.location.dataElementId) {
+                                case "MedicationDispensed.Pharmacy.Identification.ID": 
+                                    var { ID } = dataset.MedicationDispensed.Pharmacy.Identification;
+                                break;
+
+                                case "MedicationDispensed.Prescriber.Identification.ID": 
+                                    var { ID } = dataset.MedicationDispensed.Prescriber.Identification;
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            if(ID !== "" && ID.hasOwnProperty('length')) {
+                                ids = ID;
+                            } else {
+                                ids = new Array(ID);
+                            }
+                        
+                            _.forOwn(ids, function(cValue, cKey) {
+                                if(value.defaultValue.hasOwnProperty(cValue.IDQualifier)){
+                                    var newNumber = value.defaultValue[cValue.IDQualifier].substring(0, value.maxFieldLength);
+                                    cValue.IDValue = "<span class='deid' style='background-color: white;'>" + newNumber  + "</span>";
+                                }
+                            });
+
+                        } else {
+                            node = dataset[value.location.dataElementId];
+                            if(typeof(node) === 'object') {
+                                _.set(node, '#text', "<span class='deid' style='background-color: white;'>" + value.defaultValue.substring(0,value.maxFieldLength) + "</span>");
+                                _.set(dataset, value.location.dataElementId, node);
+                            } else {
+                                _.set(dataset, value.location.dataElementId, "<span class='deid' style='background-color: white;'>" + value.defaultValue.substring(0,value.maxFieldLength) + "</span>");                        
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+
+        _.forEach(transaction, function(value, key) {
+            if(value.hasOwnProperty('length')) {
+                var obj={};
+                obj[key] =  value;
+                _.forEach(obj[key], function(v, k){
+                    var tObj ={};
+                    tObj[key]=v;
+                    deid(tObj);
+                })
+            }
+
+        });
 
         _.forOwn(SCRIPT_10_6_Config, function(value, key) {
             var node;
             if(value.deidentify){
+               
+                // need to see if it's an object or array, like medicationPrescribed, maybe u just deal with Medicatino Prescribed
                 if(_.has(transaction, value.location.dataElementId)) {
                     if(value.location.dataElementId === "Patient.CommunicationNumbers.Communication" ||
                         value.location.dataElementId === "Pharmacy.CommunicationNumbers.Communication" ||
                         value.location.dataElementId === "Prescriber.CommunicationNumbers.Communication" ||
-                        value.location.dataElementId === "Supervisor.CommunicationNumbers.Communication") {
+                        value.location.dataElementId === "Supervisor.CommunicationNumbers.Communication" ||
+                        value.location.dataElementId === "MedicationDispensed.Pharmacy.CommunicationNumbers.Communication" ||
+                        value.location.dataElementId === "MedicationDispensed.Prescriber.CommunicationNumbers.Communication") {
                         var comms = "";
                         switch(value.location.dataElementId) {
                             case "Patient.CommunicationNumbers.Communication":
                                 var { Communication } = transaction.Patient.CommunicationNumbers;
                                 break;
-                            case "Pharmacy.CommunicationNumbers.Communication":
+                            case "Pharmacy.CommunicationNumbers.Communication":                          
                                 var { Communication } = transaction.Pharmacy.CommunicationNumbers;                               
                                 break;
                             case "Prescriber.CommunicationNumbers.Communication":
@@ -62,12 +155,21 @@ let deidentifySCRIPT_10_6 = (input, transactionInfo) => {
                            case "Supervisor.CommunicationNumbers.Communication":                            
                                 var { Communication } = transaction.Supervisor.CommunicationNumbers;            
                                 break;
+                            case "MedicationDispensed.Pharmacy.CommunicationNumbers.Communication":
+                                var { Communication } = transaction.MedicationDispensed.Pharmacy.CommunicationNumbers;            
+                                break;
+
+                            case "MedicationDispensed.Prescriber.CommunicationNumbers.Communication":
+                                var { Communication } = transaction.MedicationDispensed.Prescriber.CommunicationNumbers;            
+                                break;
+
                             default:
                                 break;
                         }
                         
                         if(Communication !== "") {
                             if(Communication.hasOwnProperty('length')) {
+
                                 comms = Communication;
                             } else {
                                 comms = new Array(Communication);
@@ -82,7 +184,10 @@ let deidentifySCRIPT_10_6 = (input, transactionInfo) => {
                     } else if (value.location.dataElementId === "Patient.Identification.ID" ||
                                 value.location.dataElementId === "Pharmacy.Identification.ID"  ||
                                 value.location.dataElementId === "Prescriber.Identification.ID" ||
-                                value.location.dataElementId === "Supervisor.Identification.ID" ) {
+                                value.location.dataElementId === "Supervisor.Identification.ID" || 
+                                value.location.dataElementId === "BenefitsCoordination.PayerIdentification" ||
+                                value.location.dataElementId === "MedicationDispensed.Pharmacy.Identification.ID" ||
+                                value.location.dataElementId === "MedicationDispensed.Prescriber.Identification.ID") {
                         var ids = "";
                         switch(value.location.dataElementId) {
                             case "Patient.Identification.ID":
@@ -97,6 +202,16 @@ let deidentifySCRIPT_10_6 = (input, transactionInfo) => {
                             case "Supervisor.Identification.ID":                            
                                 var { ID } = transaction.Supervisor.Identification;         
                                 break;
+                            case "BenefitsCoordination.PayerIdentification":
+                                var { ID } = transaction.BenefitsCoordination.PayerIdentification;
+                                break;
+                            case "MedicationDispensed.Pharmacy.Identification.ID":
+                                var { ID } = transaction.MedicationDispensed.Pharmacy.Identification;
+                                break;
+                            case "MedicationDispensed.Prescriber.Identification.ID":
+                                var { ID } = transaction.MedicationDispensed.Prescriber.Identification;
+                                break;
+
                             default:
                                 break;
                         }
@@ -122,7 +237,10 @@ let deidentifySCRIPT_10_6 = (input, transactionInfo) => {
                             _.set(node, '#text', "<span class='deid' style='background-color: white;'>" + value.defaultValue.substring(0,value.maxFieldLength) + "</span>");
                             _.set(transaction, value.location.dataElementId, node);                        
                         } else {
-                            _.set(transaction, value.location.dataElementId, "<span class='deid' style='background-color: white;'>" + value.defaultValue.substring(0,value.maxFieldLength) + "</span>");                        
+                            if(typeof(value.defaultValue) !== 'string'){
+                            }
+                            else
+                                _.set(transaction, value.location.dataElementId, "<span class='deid' style='background-color: white;'>" + value.defaultValue.substring(0,value.maxFieldLength) + "</span>");                        
                         }    
                     }
                 } else if(_.has(headerNode, value.location.dataElementId)) {

@@ -11,7 +11,7 @@ const SCRIPTTransctionNames = {
     PasswordChange: "Password Change",
     Verify: "Verify",
     Error: "Error",
-    RxHistoryRequest: "Prescriptin History Request",
+    RxHistoryRequest: "Prescription History Request",
     RxHistoryResponse: "Prescription History Response",
     Census: "Census",
     Resupply: "Resupply",

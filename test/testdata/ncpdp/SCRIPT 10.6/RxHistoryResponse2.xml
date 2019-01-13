@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sample of a Response to a Request from a Prescriber -->
+<Message xmlns="http://www.ncpdp.org/schema/SCRIPT"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    HighestVersionSupported="" release="006" version="010"
+    xsi:schemaLocation="http://www.ncpdp.org/schema/SCRIPT SCRIPT_XML_10_6.xsd">
+  <Header>
+    <To Qualifier="C">ASEUROWEDF</To>
+    <From Qualifier="ZZZ">3428903284</From>
+    <MessageID>PMP112</MessageID>
+    <RelatesToMessageID>123456789AA001</RelatesToMessageID>
+    <SentTime>2014-08-21T16:01:47Z</SentTime>
+    <Security>
+      <UsernameToken>
+        <Username/>
+        <Password Type="PasswordDigest">String</Password>
+        <Nonce/>
+        <Created>2001-12-17T09:30:47Z</Created>
+      </UsernameToken>
+      <Sender>
+        <SecondaryIdentification>PASSWORD</SecondaryIdentification>
+        <TertiaryIdentification/>
+      </Sender>
+      <Receiver>
+        <SecondaryIdentification/>
+        <TertiaryIdentification/>
+      </Receiver>
+    </Security>
+  </Header>
+  <Body>
+    <RxHistoryResponse>
+      <Response>
+        <Approved/>
+      </Response>
+      <Patient>
+        <Name>
+          <LastName>JONES</LastName>
+          <FirstName>DEAN</FirstName>
+        </Name>
+        <Gender>M</Gender>
+        <DateOfBirth>
+          <Date>1960-03-18</Date>
+        </DateOfBirth>
+        <Address>
+          <AddressLine1>18991 STATE STREET</AddressLine1>
+          <City>SHREWSBURY</City>
+          <State>MA</State>
+          <ZipCode>015450000</ZipCode>
+        </Address>
+      </Patient>
+      <BenefitsCoordination>
+        <EffectiveDate>
+          <Date>2014-08-01</Date>
+        </EffectiveDate>
+        <ExpirationDate>
+          <Date>2014-08-20</Date>
+        </ExpirationDate>
+        <Consent>N</Consent>
+      </BenefitsCoordination>
+      <MedicationDispensed>
+        <!-- If a compound drug, DrugDescription will be "Compound Drug" -->
+        <DrugDescription>HYDROCODONE 12.5 MG TABLET PAR</DrugDescription>
+        <DrugCoded>
+          <ProductCode>00228205710</ProductCode>
+          <ProductCodeQualifier>ND</ProductCodeQualifier>
+          <Strength/>
+        </DrugCoded>
+        <Quantity>
+          <Value>90</Value>
+          <CodeListQualifier>38</CodeListQualifier>
+          <UnitSourceCode>AC</UnitSourceCode>
+          <PotencyUnitCode>C48542</PotencyUnitCode>
+        </Quantity>
+        <DaysSupply>30</DaysSupply>
+        <!-- PMT Type=Type ame|Name=First Last|DOB=YYYY-MM-DD|Address=Street, City, ST, Zipplus4 -->
+        <Note>PMT Type=Indian Nations|Name=John Smith|DOB=1900-01-01|Address=123 Main St, Louisville, KY, 402010000</Note>
+        <Refills>
+          <Qualifier>R</Qualifier>
+          <Value>1</Value>
+        </Refills>
+        <WrittenDate>
+          <Date>2014-08-01</Date>
+        </WrittenDate>
+        <LastFillDate>
+          <Date>2014-08-01</Date>
+        </LastFillDate>
+        <Pharmacy>
+          <Identification>
+            <ID>
+                <IDValue>78787878</IDValue>
+                <IDQualifier>HPI</IDQualifier>
+            </ID>
+            <ID>
+                <IDValue>BC123233</IDValue>
+                <IDQualifier>DH</IDQualifier>
+            </ID>
+          </Identification>
+          <StoreName>ABC PHARMACY</StoreName>
+          <Address>
+            <AddressLine1>1 STATE STREET</AddressLine1>
+            <City>HOPKINTON</City>
+            <State>MA</State>
+            <ZipCode>005660000</ZipCode>
+          </Address>
+          <CommunicationNumbers>
+            <Communication>
+              <Number>5554440222</Number>
+              <Qualifier>TE</Qualifier>
+            </Communication>
+          </CommunicationNumbers>
+        </Pharmacy>
+        <Prescriber>
+          <Identification>
+            <ID>
+                <IDValue>0987654321</IDValue>
+                <IDQualifier>HPI</IDQualifier>
+            </ID>
+            <ID>
+                <IDValue>PY123233</IDValue>
+                <IDQualifier>DH</IDQualifier>
+            </ID>
+
+          </Identification>
+          <Name>
+            <LastName>FAHEY</LastName>
+            <FirstName>DAVID</FirstName>
+            <MiddleName>A</MiddleName>
+          </Name>
+          <Address>
+            <AddressLine1>26 JULIO DR</AddressLine1>
+            <City>SHREWSBURY</City>
+            <State>MA</State>
+            <ZipCode>015450000</ZipCode>
+          </Address>
+          <CommunicationNumbers>
+            <Communication>
+              <Number>5088425594</Number>
+              <Qualifier>TE</Qualifier>
+            </Communication>
+            <Communication>
+              <Number>5088420989</Number>
+              <Qualifier>FX</Qualifier>
+            </Communication>
+          </CommunicationNumbers>
+        </Prescriber>
+      </MedicationDispensed>
+      <MedicationDispensed>
+        <DrugDescription>METFORMIN HCL 500 MG TABLETMYL</DrugDescription>
+        <DrugCoded>
+          <ProductCode>00228205710</ProductCode>
+          <ProductCodeQualifier>ND</ProductCodeQualifier>
+          <Strength/>
+        </DrugCoded>
+        <Quantity>
+          <Value>60</Value>
+          <CodeListQualifier>38</CodeListQualifier>
+          <UnitSourceCode>AC</UnitSourceCode>
+          <PotencyUnitCode>C48542</PotencyUnitCode>
+        </Quantity>
+        <DaysSupply>30</DaysSupply>
+        <Refills>
+          <Qualifier>R</Qualifier>
+          <Value>5</Value>
+        </Refills>
+        <WrittenDate>
+          <Date>2014-08-06</Date>
+        </WrittenDate>
+        <LastFillDate>
+          <Date>2014-08-07</Date>
+        </LastFillDate>
+        <Pharmacy>
+          <Identification>
+            <ID>
+                <IDValue>78787878</IDValue>
+                <IDQualifier>HPI</IDQualifier>
+            </ID>
+            <ID>
+                <IDValue>BC123233</IDValue>
+                <IDQualifier>DH</IDQualifier>
+            </ID>
+          </Identification>
+          <StoreName>ABC PHARMACY</StoreName>
+          <Address>
+            <AddressLine1>1 STATE STREET</AddressLine1>
+            <City>BOSTON</City>
+            <State>MA</State>
+            <ZipCode>015660000</ZipCode>
+          </Address>
+          <CommunicationNumbers>
+            <Communication>
+              <Number>5554440222</Number>
+              <Qualifier>TE</Qualifier>
+            </Communication>
+          </CommunicationNumbers>
+        </Pharmacy>
+        <Prescriber>
+          <Identification>
+             <ID>
+                <IDValue>78787878</IDValue>
+                <IDQualifier>HPI</IDQualifier>
+            </ID>
+            <ID>
+                <IDValue>BC123233</IDValue>
+                <IDQualifier>DH</IDQualifier>
+            </ID>
+
+          </Identification>
+          <Name>
+            <LastName>STARR</LastName>
+            <FirstName>JEROME</FirstName>
+            <MiddleName>I</MiddleName>
+          </Name>
+          <Address>
+            <AddressLine1>67 BELMONT ST</AddressLine1>
+            <City>WORCESTER</City>
+            <State>MA</State>
+            <ZipCode>016050000</ZipCode>
+            <PlaceLocationQualifier>AD2</PlaceLocationQualifier>
+          </Address>
+          <CommunicationNumbers>
+            <Communication>
+              <Number>5087541707</Number>
+              <Qualifier>TE</Qualifier>
+            </Communication>
+            <Communication>
+              <Number>5083345331</Number>
+              <Qualifier>FX</Qualifier>
+            </Communication>
+          </CommunicationNumbers>
+        </Prescriber>
+      </MedicationDispensed>
+    </RxHistoryResponse>
+  </Body>
+</Message>
