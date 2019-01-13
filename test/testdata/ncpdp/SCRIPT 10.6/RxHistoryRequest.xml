@@ -71,9 +71,9 @@
                 </PayerIdentification>
                 <PayerName>PBM Co</PayerName>
                 <CardholderID>SAMPLEID</CardholderID>
-                <ResponsibileParty>
+                <ResponsibleParty>
                     <LastName>Rutherford</LastName>
-                </ResponsibileParty>
+                </ResponsibleParty>
                 <GroupID>SAMPLEGROUPID</GroupID>
                 <EffectiveDate>
                     <Date>2018-11-26</Date>

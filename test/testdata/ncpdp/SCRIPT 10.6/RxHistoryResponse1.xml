@@ -72,9 +72,9 @@
                 </PayerIdentification>
                 <PayerName>PBM Co</PayerName>
                 <CardholderID>SAMPLEID</CardholderID>
-                <ResponsibileParty>
+                <ResponsibleParty>
                     <LastName>RUTHERFORD</LastName>
-                </ResponsibileParty>
+                </ResponsibleParty>
                 <GroupID>SAMPLEGROUPID</GroupID>
                 <EffectiveDate>
                     <Date>2006-11-26</Date>
