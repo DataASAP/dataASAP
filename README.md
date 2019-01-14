@@ -34,7 +34,7 @@ DataASAP was developed using the following technologies:
 * Semantic UI React
 * Javascript
 
-There is a lot of work that I'd like to do to this application including much refactoring, ensuring all NCPDP transactions are supported and adding additional transaction types such as X12 and HL7. The ![issues log](https://github.com/dcheli/dataASAP/issues) contains items I am aware of that need work. Some items are very broad and can/will be broken down into smaller items in time. 
+There is a lot of work that I'd like to do to this application including much refactoring, ensuring all NCPDP transactions are supported and adding additional transaction types such as X12 and HL7. The [Issues section](https://github.com/dcheli/dataASAP/issues) contains items I am aware of that need work. Some items are very broad and can/will be broken down into smaller items in time. 
 
 Feel free to reach out to me with questions. 
 Thanks
