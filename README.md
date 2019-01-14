@@ -30,7 +30,7 @@ If you would like to help improve this application, please contact me.
 
 DataASAP was developed using the following technologies:
 * Electron
-* React-Redux
+* React-Redux-Router
 * Semantic UI React
 * Javascript
 
