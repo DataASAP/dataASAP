@@ -1,13 +1,13 @@
 {
-  "name": "DataASAP",
+  "name": "dataasap",
   "version": "1.0.0",
   "description": "Tool for easily deidentifying healthcare transactions.",
   "main": "init.js",
-  "author": {
-    "name": "Dave Cheli",
-    "email": "dcheli@live.com"
+  "author": "Dave Cheli <dcheli@live.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dcheli/dataASAP.git"
   },
-  "repository": "https://github.com/jschr/electron-react-redux-boilerplate",
   "license": "MIT",
   "dependencies": {
     "babel-runtime": "^6.26.0",
@@ -72,5 +72,22 @@
     "private:compile": "babel app/ --copy-files --out-dir build",
     "private:clean": "rimraf build",
     "private:format": "prettier \"scripts/*.js\" \"app/**/*.js\" \"test/**/*.js\""
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/dcheli/dataASAP/issues"
+  },
+  "homepage": "https://github.com/dcheli/",
+  "directories": {
+    "test": "test"
+  },
+  "keywords": [
+    "HIPAA",
+    "deidentify",
+    "PHI",
+    "NCPDP",
+    "X12",
+    "HL7",
+    "healthcare",
+    "EDI"
+  ]
 }

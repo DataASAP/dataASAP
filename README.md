@@ -1,4 +1,15 @@
-# electron-react-redux-boilerplate
+# Welcome to DataASAP
+DataASAP is a tool to help deidentifying healthcare data easier. 
+The images below show how the tool works. 
+
+##Installing
+# Prerequisites
+[!Git]
+
+Download the latest DataASAP release.
+
+DataASAP will automatically update when a new release is available.
+
 [![Build Status](https://api.travis-ci.org/jschr/electron-react-redux-boilerplate.svg)](https://travis-ci.org/jschr/electron-react-redux-boilerplate)
 [![dependencies Status](https://david-dm.org/jschr/electron-react-redux-boilerplate/status.svg)](https://david-dm.org/jschr/electron-react-redux-boilerplate)
 [![devDependencies Status](https://david-dm.org/jschr/electron-react-redux-boilerplate/dev-status.svg)](https://david-dm.org/jschr/electron-react-redux-boilerplate?type=dev)
@@ -47,36 +58,6 @@ Toggle DevTools:
 * Linux: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>I</kbd> or <kbd>F12</kbd>
 * Windows: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>I</kbd> or <kbd>F12</kbd>
 
-## Packaging
-
-Modify [electron-builder.yml](./electron-builder.yml) to edit package info.
-
-For a full list of options see: https://github.com/electron-userland/electron-builder/wiki/Options.
-
-Create a package for OSX, Windows and Linux
-```
-npm run pack
-```
-
-Or target a specific platform
-```
-npm run pack:mac
-npm run pack:win
-npm run pack:linux
-```
-
-## Tests
-
-```
-npm run test
-```
-
 ## Maintainers
 
-- [@jschr](https://github.com/jschr)
-- [@pronebird](https://github.com/pronebird)
-
-## Apps using this boilerplate
-
-- [Mullvad VPN app](https://github.com/mullvad/mullvadvpn-app)
-- [YouTube Downloader Electron](https://github.com/vanzylv/youtube-downloader-electron)
+- [@dcheli](https://github.com/dcheli)
