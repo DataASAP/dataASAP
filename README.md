@@ -1,6 +1,12 @@
-# Welcome to DataASAP
-DataASAP is a tool to help deidentifying healthcare data easier. 
-The images below show how the tool works. 
+## Welcome to DataASAP
+DataASAP is an Electron based desktop tool to help deidentify healthcare data easier. It runs on Windows, MacOS and Linux. You may freely use this application. 
+
+### Use Case
+The use case this supports is the situation where you need to send a deidentified transaction to some party, for example a technical support team. DataASAP allows you to simply paste the transaction into the application and press the De-identify button as shown below. Currently, DataASAP only supports NCPDP transactions such as telecom D.0, SCRIPT 10.6 and SCRIPT 20170714. 
+Download the latest DataASAP release. Future releases will contain support for X12 and HL7 transactions.
+
+If you would like to get involved with this project as a developer, tester, submit ideas to improve it, please see the section below "How to Help"
+
 
 ![mainscreen_withdata](https://user-images.githubusercontent.com/2772894/51127517-3d9d8e80-17eb-11e9-8e0f-362654e24345.png)
 
@@ -10,23 +16,24 @@ After pressing the De-Identify button, the data is de-identified allowing you to
 
 You can change the default de-identification values for each transaction type as shown in the screens below.
 
+![configscreen_nav](https://user-images.githubusercontent.com/2772894/51127975-696d4400-17ec-11e9-9137-26ffae327456.png)
+
+![configscreen_d0](https://user-images.githubusercontent.com/2772894/51128140-c668fa00-17ec-11e9-9183-a34a6b5eb011.png)
 
 
-Download the latest DataASAP release.
 
 DataASAP will automatically update when a new release is available.
 
-[![Build Status](https://api.travis-ci.org/jschr/electron-react-redux-boilerplate.svg)](https://travis-ci.org/jschr/electron-react-redux-boilerplate)
-[![dependencies Status](https://david-dm.org/jschr/electron-react-redux-boilerplate/status.svg)](https://david-dm.org/jschr/electron-react-redux-boilerplate)
-[![devDependencies Status](https://david-dm.org/jschr/electron-react-redux-boilerplate/dev-status.svg)](https://david-dm.org/jschr/electron-react-redux-boilerplate?type=dev)
 
 
-Including:
+### How to Help
+DataASAP was developed using the following technologies:
+* Electron
+* React-Redux
+* Javascript
 
-* [Electron DevTools Installer](https://github.com/MarshallOfSound/electron-devtools-installer)
-* [Electron Mocha](https://github.com/jprichardson/electron-mocha)
-* [Browsersync](https://browsersync.io/)
+There is a lot of work that I'd like to do to this application including much refactoring, enuring all NCPDP transactions are supported and adding additional transaction types such as X12 and HL7. 
 
-## Quick start
-
+Feel free to reach out to me with questions. 
+Thanks
 - Dave Cheli [@dcheli](https://github.com/dcheli)
