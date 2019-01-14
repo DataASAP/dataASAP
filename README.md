@@ -1,8 +1,14 @@
 # Welcome to DataASAP
 DataASAP is a tool to help deidentifying healthcare data easier. 
 The images below show how the tool works. 
+
 ![mainscreen_withdata](https://user-images.githubusercontent.com/2772894/51127517-3d9d8e80-17eb-11e9-8e0f-362654e24345.png)
 
+After pressing the De-Identify button, the data is de-identified allowing you to copy the deidentified data to the clipboard or saving it to a file. 
+
+![mainscreen_with_deid](https://user-images.githubusercontent.com/2772894/51127705-c3213e80-17eb-11e9-87d2-e49275130ee7.png)
+
+You can change the default de-identification values for each transaction type as shown in the screens below.
 
 
 
