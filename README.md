@@ -1,8 +1,9 @@
 # Welcome to DataASAP
 DataASAP is a tool to help deidentifying healthcare data easier. 
 The images below show how the tool works. 
+![mainscreen_withdata](https://user-images.githubusercontent.com/2772894/51127517-3d9d8e80-17eb-11e9-8e0f-362654e24345.png)
 
-![mainscreen_sm](https://user-images.githubusercontent.com/2772894/51126983-0f6b7f00-17ea-11e9-9d44-510ef366490d.png)
+
 
 
 Download the latest DataASAP release.
