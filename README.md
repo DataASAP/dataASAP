@@ -16,7 +16,7 @@ You start by pasting your transaction into the top pane.
 
 If the format of the data that you paste into the top pane is recognized, shown in the top Format Detected section, you can proceed with deidentifying your data. If it's not recognized the Format Detected section will show 'N/A'. 
 
-After pressing the De-Identify button, the data is de-identified as shown in the lower pane. From here you can copy the deidentified data to the clipboard or save it to a file. 
+After pressing the De-Identify button, the data is de-identified in the lower pane as shown below. From here you can copy the deidentified data to the clipboard or save it to a file. 
 
 ![mainscreen_with_deid](https://user-images.githubusercontent.com/2772894/51127705-c3213e80-17eb-11e9-87d2-e49275130ee7.png)
 
