@@ -6,8 +6,10 @@ The use case this supports is the situation where you need to send a deidentifie
 
 If you would like to get involved with this project as a developer, tester, submit ideas to improve it, please see the [How to Help](#how-to-help) section below. 
 
-The screen shots below shows what the application looks like and how it works. 
+### How it Works
+The screen shots below show what the application looks like and how it works. 
 
+#### Deidentifying data
 You start by pasting your transaction into the top pane. 
 
 ![mainscreen_withdata](https://user-images.githubusercontent.com/2772894/51127517-3d9d8e80-17eb-11e9-8e0f-362654e24345.png)
@@ -18,13 +20,16 @@ After pressing the De-Identify button, the data is de-identified as shown in the
 
 **NOTE: The data that you paste in the top pane is not saved or sent anywhere. The data in the lower pane is only saved if you select the 'Save As...' button and save it to a file.**
 
+If the format of the data that you paste into the top pane is not recognized by the application, indicated by 'N/A', you won't be able to deidentify the transaction. 
+
+#### Changing default values
 You can change the default de-identification values for each transaction type as shown in the screens below.
 
 ![configscreen_nav](https://user-images.githubusercontent.com/2772894/51127975-696d4400-17ec-11e9-9137-26ffae327456.png)
 
 ![configscreen_d0](https://user-images.githubusercontent.com/2772894/51128140-c668fa00-17ec-11e9-9183-a34a6b5eb011.png)
 
-
+That's pretty much it. 
 
 
 ### How to Help
