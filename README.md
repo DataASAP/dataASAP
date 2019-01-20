@@ -2,7 +2,7 @@
 DataASAP is an Electron based desktop tool to help deidentify healthcare data easier. It runs on Windows, MacOS and Linux. You may freely use this application. 
 
 ### Use Case
-The use case this supports is the situation where you need to send a deidentified transaction to some party, for example a technical support team. DataASAP allows you to simply paste the transaction into the application and press the De-identify button as shown below. Currently, DataASAP only supports NCPDP transactions such as Telecom D.0, SCRIPT 10.6 and SCRIPT 20170714. Future releases will contain support for X12 and HL7 transactions.
+The use case this addresses is the situation where you need to send a deidentified transaction to some party, for example a technical support team. DataASAP allows you to simply paste the transaction into the application and press the De-identify button as shown below. Currently, DataASAP only supports NCPDP transactions such as Telecom D.0, SCRIPT 10.6 and SCRIPT 20170714. Future releases will contain support for X12 and HL7 transactions.
 
 If you would like to get involved with this project as a developer, tester, submit ideas to improve it, please see the [How to Help](#how-to-help) section below. 
 
