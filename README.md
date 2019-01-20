@@ -36,7 +36,7 @@ That's pretty much it.
 ### How to Help
 This project adheres to the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/1/4/code-of-conduct.html). By participating, you are expected to uphold this code. Please report unacceptable behavior to dave@dataasap.com.
 
-If you would like to help improve this application, please contact me. Information on contributing can be found here [CONTRIBUTUING](https://github.com/dcheli/dataASAP/blob/master/CONTRIBUTING.md).
+If you would like to help improve this application, please contact me. Information on contributing can be found here [CONTRIBUTING](https://github.com/dcheli/dataASAP/blob/master/CONTRIBUTING.md).
 
 
 Feel free to reach out to me with questions. 
