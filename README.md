@@ -14,13 +14,15 @@ You start by pasting your transaction into the top pane.
 
 ![mainscreen_withdata](https://user-images.githubusercontent.com/2772894/51127517-3d9d8e80-17eb-11e9-8e0f-362654e24345.png)
 
+If the format of the data that you paste into the top pane is recognized, you can proceed with deidentifying your data. If it's not
+recognized the detected format will be 'N/A'. 
+
 After pressing the De-Identify button, the data is de-identified as shown in the lower pane. From here you can copy the deidentified data to the clipboard or save it to a file. 
 
 ![mainscreen_with_deid](https://user-images.githubusercontent.com/2772894/51127705-c3213e80-17eb-11e9-87d2-e49275130ee7.png)
 
 **NOTE: The data that you paste in the top pane is not saved or sent anywhere. The data in the lower pane is only saved if you select the 'Save As...' button and save it to a file.**
 
-If the format of the data that you paste into the top pane is not recognized by the application, indicated by 'N/A', you won't be able to deidentify the transaction. 
 
 #### Changing default values
 You can change the default de-identification values for each transaction type as shown in the screens below.
