@@ -1,5 +1,5 @@
 const NCPDP_D0_Config = {
-    "1_cardholderFirstName":  {"displayOrder" : 1, "displayName": "Cardholder First Name","location": {"segment": "AM04", "dataElementId": "CC"}, "deidentify" : false, "defaultValue": "CARDHOLDER FIRSTNAME"},
+    "1_cardholderFirstName":  {"displayOrder" : 1, "displayName": "Cardholder First Name","location": {"segment": "AM04", "dataElementId": "CC"}, "deidentify" : true, "defaultValue": "CARDHOLDER FIRSTNAME"},
     "2_cardholderLastName":   {"displayOrder" : 2, "displayName": "Cardholder Last Name","location": {"segment": "AM04", "dataElementId": "CD"}, "deidentify" : true, "defaultValue": "CARDHOLDER LASTNAME"},
     "3_patientFirstName":     {"displayOrder" : 3, "displayName": "Patient First Name","location": {"segment": "AM01", "dataElementId": "CA"}, "deidentify" : true, "defaultValue": "PATIENT FIRSTNAME"},
     "4_patientLastName":      {"displayOrder" : 4, "displayName": "Patient Last Name","location": {"segment": "AM01", "dataElementId": "CB"}, "deidentify" : true, "defaultValue": "PATIENT LASTNAME"},
@@ -63,6 +63,6 @@ const NCPDP_D0_Config = {
     "62_otherPayerCardholderId":    {"displayOrder" : 62, "displayName": "Other Payer Cardholder ID","location": {"segment": "AM24", "dataElementId": "NU"}, "deidentify" : true, "defaultValue": "OTHER CARHHOLDER ID"},    
     "63_otherPayerGroupId": {"displayOrder" : 63, "displayName": "Other Payer Group ID","location": {"segment": "AM24", "dataElementId": "MJ"}, "deidentify" : true, "defaultValue": "OTHER PAYER GROUP ID"},    
     "64_otherPayerHelpDeskPhone":   {"displayOrder" : 64, "displayName": "Other Payer Help Desk Phone","location": {"segment": "AM24", "dataElementId": "UB"}, "deidentify" : true, "defaultValue": "7777777777"},
-    "65_authorizationNumber" : {"displayOrder" : 64, "displayName": "Authorization Number","location": {"segment": "AM21", "dataElementId": "F3"}, "deidentify" : true, "defaultValue": "AUTHORIZATION NUMBER"},
+    "65_authorizationNumber" : {"displayOrder" : 65, "displayName": "Authorization Number","location": {"segment": "AM21", "dataElementId": "F3"}, "deidentify" : true, "defaultValue": "AUTHORIZATION NUMBER"},
 }
 export default NCPDP_D0_Config;
