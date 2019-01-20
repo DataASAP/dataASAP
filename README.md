@@ -27,7 +27,7 @@ DataASAP will automatically update when a new release is available.
 
 ### How to Help
 If you would like to help improve this application, please contact me. 
-This project adheres to the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/1/4/code-of-conduct.html). By participating, you are expected to uphold this code. Please report unacceptable behavior to atom@github.com.
+This project adheres to the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/1/4/code-of-conduct.html). By participating, you are expected to uphold this code. Please report unacceptable behavior to dave@dataasap.com.
 
 DataASAP was developed using the following technologies:
 * Electron
