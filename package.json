@@ -77,9 +77,7 @@
     "url": "https://github.com/dcheli/dataASAP/issues"
   },
   "homepage": "https://github.com/dcheli/",
-  "directories": {
-    "test": "test"
-  },
+
   "keywords": [
     "HIPAA",
     "deidentify",
