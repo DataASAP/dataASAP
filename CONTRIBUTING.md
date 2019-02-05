@@ -32,7 +32,9 @@ I am open to suggestions and will prioritize suggestions based on my time, inter
 This project adheres to the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/1/4/code-of-conduct.html). By participating, you are expected to uphold this code. Please report unacceptable behavior to dave@dataasap.com.
 
 ## Download, Run and Package the project
-To get started, feel free to download the project. Once downloaded, change to the project folder and install the node modules with the following command:
+To get started, feel free to download the project. 
+
+Once downloaded, change to the project folder and install the node modules with the following command:
 `npm run install`
 
 Once completed you can run the project in development mode with the following command:
@@ -43,7 +45,6 @@ To package the project use the following commands:
 
 NOTE: I recommend running these commands on the actual operating system. You must do this for macOS and while my understanding is that you can package Linux distributions on windows, I haven't been able to get this to work. This also applies to packaging rpm on CentOS and  debian on Ubuntu. 
 
-The 
 ### Windows
 `npm run pack:win`
 
