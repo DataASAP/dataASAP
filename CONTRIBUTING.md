@@ -30,3 +30,24 @@ If you are a tester, I can use some help. Does this run on your platform? Do the
 I am open to suggestions and will prioritize suggestions based on my time, interest from others, and time that possibly some other developers and testers would want to work on them.
 
 This project adheres to the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/1/4/code-of-conduct.html). By participating, you are expected to uphold this code. Please report unacceptable behavior to dave@dataasap.com.
+
+## Download, Run and Build the project
+To get started, feel free to download the project. Once downloaded, change to the project folder and install the node modules with the following command:
+`npm run install`
+
+Once completed you can run the project in development mode with the following command:
+`npm run dev`
+
+To package the project use the following commands:
+NOTE: I recommend running these commands on the actual operating system. You must do this for macOS and while my understanding is that you can package Linux distributions on windows, I haven't been able to get this to work. This also applies to packaging rpm on CentOS and  debian on Ubuntu. 
+### Windows
+`npm run pack:win`
+
+### macOS
+`npm run pack:mac`
+
+### CentOS
+`npm run pack:linux:npm`
+
+### Ubuntu (or other debian based OS)
+`npm run pack:linux:deb`
