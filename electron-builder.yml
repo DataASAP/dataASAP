@@ -34,7 +34,7 @@ win:
 nsis:
   deleteAppDataOnUninstall: 'true'
   
-linux:
+linux:rpm:
   target:
     - rpm
   executableName: 'dataasap'
@@ -44,4 +44,16 @@ linux:
   desktop:
     StartupNotify: true
     Keywords: 'dataasap; deidentification tool'
+
+
+linux:deb:
+  target:
+    - deb
+  executableName: 'dataasap'
+  category: 'Utility;Development'
+  packageCategory: 'Utility;Development'
+  icon: ./
+  desktop:
+    StartupNotify: true
+    Keywords: 'dataasap; deidentification tool'    
 
