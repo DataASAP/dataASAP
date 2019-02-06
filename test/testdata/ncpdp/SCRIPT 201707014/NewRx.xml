@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Message DatatypesVersion="20170714" TransportVersion="20170714" TransactionDomain="SCRIPT" TransactionVersion="20170714" StructuresVersion="20170714" 
+  ECLVersion="20170714" xsi:noNamespaceSchemaLocation="transport.xsd"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">      
+   <Header>
+      <To Qualifier="P">1366629743</To>
+      <From Qualifier="D">1891724563</From>
+      <MessageID>500000</MessageID>
+      <SentTime>2018-01-02T11:30:15</SentTime>
+      <SenderSoftware>
+         <SenderSoftwareDeveloper>NIST Conformance Tool</SenderSoftwareDeveloper>
+         <SenderSoftwareProduct>443</SenderSoftwareProduct>
+         <SenderSoftwareVersionRelease>12.1</SenderSoftwareVersionRelease>
+      </SenderSoftware>
+      <PrescriberOrderNumber>ORDMU201</PrescriberOrderNumber>
+   </Header>
+   <Body>
+      <NewRx>
+          <Patient>
+            <HumanPatient>
+               <Identification>
+                  <PatientAccountNumber>PBMC-ONC MU-6004D</PatientAccountNumber>
+               </Identification>
+               <Name>
+                  <LastName>Duro</LastName>
+                  <FirstName>Paula</FirstName>
+               </Name>
+               <Gender>F</Gender>
+               <DateOfBirth>
+                  <Date>1989-08-16</Date>
+               </DateOfBirth>
+               <Address>
+                  <AddressLine1>4011 Whispering Pines Circle</AddressLine1>
+                  <City>Dallas</City>
+                  <StateProvince>TX</StateProvince>
+                  <PostalCode>75240</PostalCode>
+                  <CountryCode>US</CountryCode>
+               </Address>
+               <CommunicationNumbers>
+                  <PrimaryTelephone>
+                  <Number>2142011214</Number>
+                  </PrimaryTelephone>
+               </CommunicationNumbers>
+            </HumanPatient>
+         </Patient>
+         <Pharmacy>
+            <Identification>      
+               <NCPDPID>1367084</NCPDPID>
+               <NPI>1366629743</NPI>
+            </Identification>
+            <BusinessName>TX Pharmacy 10.6MU</BusinessName>
+            <Address>
+               <AddressLine1>W136 N7084 Texans Way</AddressLine1>
+               <City>Houston</City>
+               <StateProvince>TX</StateProvince>
+               <PostalCode>77001</PostalCode>
+               <CountryCode>US</CountryCode>
+            </Address>
+            <CommunicationNumbers>
+               <PrimaryTelephone>
+               <Number>8322028232</Number>
+               </PrimaryTelephone>
+            </CommunicationNumbers>
+         </Pharmacy>
+         <Prescriber>
+            <NonVeterinarian>
+               <Identification>      
+                  <DEANumber>BB3070303</DEANumber>
+                  <NPI>1891724563</NPI>
+               </Identification>
+               <PracticeLocation>
+                  <BusinessName>Clinic One3</BusinessName>
+               </PracticeLocation>
+               <Name>
+                  <LastName>Branson</LastName>
+                  <FirstName>Thomas</FirstName>
+                  <MiddleName>Middle</MiddleName>
+                  <Suffix>Jr.</Suffix>
+                  <Prefix>Dr.</Prefix>
+               </Name>
+               <Address>
+                  <AddressLine1>9989 Rockets Rd</AddressLine1>
+                  <AddressLine2>Suite 100</AddressLine2>
+                  <City>Houston</City>
+                  <StateProvince>TX</StateProvince>
+                  <PostalCode>77001</PostalCode>
+                  <CountryCode>US</CountryCode>
+               </Address>
+               <CommunicationNumbers>
+                  <PrimaryTelephone>
+                  <Number>2815201233</Number>
+                  </PrimaryTelephone>
+               </CommunicationNumbers>
+            </NonVeterinarian>
+         </Prescriber>
+         <MedicationPrescribed>
+            <DrugDescription>ProAir HFA 90 MCG/ACTUAT Metered Dose Inhaler, 200 ACTUAT</DrugDescription>
+            <DrugCoded>
+               <ProductCode>
+                  <Code>21695085185</Code>
+                  <Qualifier>ND</Qualifier>
+               </ProductCode>
+               <Strength>
+                  <StrengthValue>90</StrengthValue>
+                  <StrengthForm>
+                     <Code>C42960</Code>
+                  </StrengthForm>
+                  <StrengthUnitOfMeasure>
+                     <Code>C48152</Code>
+                  </StrengthUnitOfMeasure>
+               </Strength>
+               <DrugDBCode>
+                  <Code>745752</Code>
+                  <Qualifier>SBD</Qualifier>
+               </DrugDBCode>
+            </DrugCoded>
+            <Quantity>
+               <Value>8.5</Value>
+               <CodeListQualifier>38</CodeListQualifier>
+               <QuantityUnitOfMeasure>
+                  <Code>C48155</Code>
+                </QuantityUnitOfMeasure>
+            </Quantity>
+            <WrittenDate>
+               <Date>2018-01-02</Date>
+            </WrittenDate>
+            <Substitutions>1</Substitutions>
+            <NumberOfRefills>2</NumberOfRefills>
+            <Diagnosis>
+               <ClinicalInformationQualifier>1</ClinicalInformationQualifier>
+               <Primary>
+                  <Code>J4530</Code>
+                  <Qualifier>ABF</Qualifier>
+                  <Description>Mild persistent asthma, uncomplicated</Description>
+               </Primary>
+            </Diagnosis>
+            <Sig>
+               <SigText>Inhale 2 puff oral route every 4 TO 6 hour as needed for shortness of breath maximum 12 inhalation per 24 hour</SigText>
+               <CodeSystem>
+                  <SNOMEDVersion>20160901</SNOMEDVersion>
+                  <FMTVersion>16.03d</FMTVersion>
+               </CodeSystem>
+               <Instruction>
+                  <DoseAdministration>
+                     <DoseDeliveryMethod>
+                        <Text>Inhale</Text>
+                        <Qualifier>SNOMED</Qualifier>
+                        <Code>421134003</Code>
+                     </DoseDeliveryMethod>
+                     <Dosage>
+                        <DoseQuantity>2</DoseQuantity>
+                        <DoseUnitOfMeasure>
+                           <Text>Puff</Text>
+                           <Qualifier>DoseUnitOfMeasure</Qualifier>
+                           <Code>C65060</Code>
+                        </DoseUnitOfMeasure>
+                     </Dosage>
+                     <RouteOfAdministration>
+                        <Text>oral route</Text>
+                        <Qualifier>SNOMED</Qualifier>
+                        <Code>26643006</Code>
+                     </RouteOfAdministration>
+                  </DoseAdministration>
+                  <TimingAndDuration>
+                     <Interval>
+                        <IntervalNumericValue>4</IntervalNumericValue>
+                        <VariableIntervalModifier>TO</VariableIntervalModifier>
+                        <IntervalNumericValue>6</IntervalNumericValue>
+                        <IntervalUnits>
+                           <Text>hour</Text>
+                           <Qualifier>SNOMED</Qualifier>
+                           <Code>258702006</Code>
+                        </IntervalUnits>
+                     </Interval>
+                  </TimingAndDuration>
+                  <IndicationForUse>
+                     <IndicationPrecursor>
+                        <Text>as needed for</Text>
+                        <Qualifier>SNOMED</Qualifier>
+                        <Code>420449005</Code>
+                     </IndicationPrecursor>
+                     <Indication>
+                        <Text>shortness of breath</Text>
+                        <Qualifier>SNOMED</Qualifier>
+                        <Code> 267036007</Code>
+                     </Indication>
+                  </IndicationForUse>
+                  <MaximumDoseRestriction>
+                     <MaximumDoseRestrictionNumericValue>12</MaximumDoseRestrictionNumericValue>
+                     <MaximumDoseRestrictionForm>
+                        <Text>inhalation</Text>
+                        <Qualifier>DoseUnitOfMeasure</Qualifier>
+                        <Code>C48501</Code>
+                     </MaximumDoseRestrictionForm>
+                     <MaximumDoseRestrictionDurationValue>24</MaximumDoseRestrictionDurationValue>
+                     <MaximumDoseRestrictionDurationUnit>
+                        <Text>hour</Text>
+                        <Qualifier>SNOMED</Qualifier>
+                        <Code>258702006</Code>
+                     </MaximumDoseRestrictionDurationUnit>
+                  </MaximumDoseRestriction>
+               </Instruction>
+            </Sig>
+            <PrescriberCheckedREMS>A</PrescriberCheckedREMS>
+         </MedicationPrescribed>
+      </NewRx>
+    </Body>
+</Message>
+<!--
+NIST_NCPDP_Certification (Updated: 2018-11-28)
+-->

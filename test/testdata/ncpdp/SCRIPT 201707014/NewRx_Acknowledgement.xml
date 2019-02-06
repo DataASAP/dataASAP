@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Message DatatypesVersion="20170714" TransportVersion="20170714" TransactionDomain="SCRIPT" TransactionVersion="20170714" StructuresVersion="20170714" 
+  ECLVersion="20170714" xsi:noNamespaceSchemaLocation="transport.xsd"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">      
+   <Header>
+      <To Qualifier="D">1891724563</To>
+      <From Qualifier="P">1366629743</From>
+      <MessageID>100000</MessageID>
+      <RelatesToMessageID>900070</RelatesToMessageID>
+      <SentTime>2018-01-02T11:31:15</SentTime>
+      <SenderSoftware>
+         <SenderSoftwareDeveloper>NIST Conformance Tool</SenderSoftwareDeveloper>
+         <SenderSoftwareProduct>443</SenderSoftwareProduct>
+         <SenderSoftwareVersionRelease>12.1</SenderSoftwareVersionRelease>
+      </SenderSoftware>
+      <RxReferenceNumber>PHARMMU201</RxReferenceNumber>
+      <PrescriberOrderNumber>ORDMU201</PrescriberOrderNumber>
+   </Header>
+   <Body>
+      <Status>
+         <Code>010</Code>
+      </Status>
+   </Body>
+</Message>
+<!--
+NIST_NCPDP_Certification (Updated: 2018-11-28)
+-->
