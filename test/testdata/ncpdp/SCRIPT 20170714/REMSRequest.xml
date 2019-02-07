@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Message DatatypesVersion="20170714" TransportVersion="20170714" TransactionDomain="SCRIPT" TransactionVersion="20170714" StructuresVersion="20170714" 
+  ECLVersion="20170714" xsi:noNamespaceSchemaLocation="transport.xsd"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">      
+   <Header>
+      <To Qualifier="PY">PAYER123</To>
+      <From Qualifier="D">1619967999</From>
+      <MessageID>500000</MessageID>
+      <RelatesToMessageID>400070</RelatesToMessageID>
+      <SentTime>2017-10-01T10:35:45</SentTime>
+      <SenderSoftware>
+         <SenderSoftwareDeveloper>NIST Conformance Tool</SenderSoftwareDeveloper>
+         <SenderSoftwareProduct>443</SenderSoftwareProduct>
+         <SenderSoftwareVersionRelease>12.1</SenderSoftwareVersionRelease>
+      </SenderSoftware>
+      <RxReferenceNumber>PHARMMU201</RxReferenceNumber>
+      <PrescriberOrderNumber>ORDMU201</PrescriberOrderNumber>
+   </Header>
+   <Body>
+      <REMSRequest>
+          <REMSReferenceID>88XX2</REMSReferenceID>
+         <Patient>
+            <HumanPatient>
+               <Identification>
+                  <PatientAccountNumber>PBMC-ONC MU-6009J</PatientAccountNumber>
+               </Identification>
+               <Name>
+                  <LastName>Hocking</LastName>
+                  <FirstName>Spencer</FirstName>
+               </Name>
+               <Gender>M</Gender>
+               <DateOfBirth>
+                  <Date>1946-07-07</Date>
+               </DateOfBirth>
+               <Address>
+                  <AddressLine1>3632 Ralph Drive</AddressLine1>
+                  <City>Independence</City>
+                  <StateProvince>OH</StateProvince>
+                  <PostalCode>44131</PostalCode>
+                  <CountryCode>US</CountryCode>
+               </Address>
+               <CommunicationNumbers>
+                  <PrimaryTelephone>
+                  <Number>2162181219</Number>
+                  </PrimaryTelephone>
+               </CommunicationNumbers>
+            </HumanPatient>
+         </Patient>
+         <Pharmacy>
+            <Identification>      
+               <NCPDPID>9911557</NCPDPID>
+               <NPI>1801849179</NPI>
+            </Identification>
+            <BusinessName>CA Pharmacy 10.6MU</BusinessName>
+            <Address>
+               <AddressLine1>65432 Cabernet Turn</AddressLine1>
+               <City>Sonoma</City>
+               <StateProvince>CA</StateProvince>
+               <PostalCode>95476</PostalCode>
+               <CountryCode>US</CountryCode>
+            </Address>
+            <CommunicationNumbers>
+               <PrimaryTelephone>
+               <Number>7072107071</Number>
+               </PrimaryTelephone>
+            </CommunicationNumbers>
+         </Pharmacy>
+         <Prescriber>
+            <NonVeterinarian>
+               <Identification>      
+                  <DEANumber>BM6040606</DEANumber>
+                  <NPI>1619967999</NPI>
+               </Identification>
+               <PracticeLocation>
+                  <BusinessName>Clinic One6</BusinessName>
+               </PracticeLocation>
+               <Name>
+                  <LastName>MacClare</LastName>
+                  <FirstName>Susan</FirstName>
+               </Name>
+               <Address>
+                  <AddressLine1>10105 Trailblazer Ct</AddressLine1>
+                  <City>Portland</City>
+                  <StateProvince>OR</StateProvince>
+                  <PostalCode>97215</PostalCode>
+                  <CountryCode>US</CountryCode>
+               </Address>
+               <CommunicationNumbers>
+                  <PrimaryTelephone>
+                  <Number>5034732233</Number>
+                  </PrimaryTelephone>
+               </CommunicationNumbers>
+            </NonVeterinarian>
+         </Prescriber>
+         <MedicationPrescribed>
+            <DrugDescription>Clozapine 100 MG Oral Tablet</DrugDescription>
+            <DrugCoded>
+               <ProductCode>
+                  <Code>00093777205</Code>
+                  <Qualifier>ND</Qualifier>
+               </ProductCode>
+               <Strength>
+                  <StrengthValue>100</StrengthValue>
+                  <StrengthForm>
+                     <Code>C42998</Code>
+                  </StrengthForm>
+                  <StrengthUnitOfMeasure>
+                     <Code>C28253</Code>
+                  </StrengthUnitOfMeasure>
+               </Strength>
+               <DrugDBCode>
+                  <Code>197535</Code>
+                  <Qualifier>SCD</Qualifier>
+               </DrugDBCode>
+            </DrugCoded>
+            <Quantity>
+               <Value>90</Value>
+               <CodeListQualifier>38</CodeListQualifier>
+               <QuantityUnitOfMeasure>
+                  <Code>C48542</Code>
+                </QuantityUnitOfMeasure>
+            </Quantity>
+            <DaysSupply>30</DaysSupply>
+            <Substitutions>1</Substitutions>
+            <Diagnosis>
+               <ClinicalInformationQualifier>1</ClinicalInformationQualifier>
+               <Primary>
+                  <Code>F200</Code>
+                  <Qualifier>ABF</Qualifier>
+                  <Description>Paranoid schizophrenia</Description>
+               </Primary>
+            </Diagnosis>
+            <Sig>
+               <SigText>Take 1 tablet by mouth three times a day.</SigText>
+            </Sig>
+         </MedicationPrescribed>
+         <Request>
+            <SolicitedModel>
+               <REMSCaseID>A107</REMSCaseID>
+               <DeadlineForReply>
+                  <DateTime>2017-11-01T23:59:59</DateTime>
+               </DeadlineForReply>
+            </SolicitedModel>
+         </Request>
+      </REMSRequest>
+    </Body>
+</Message>
+<!--
+NIST_NCPDP_Certification (Updated: 2018-10-30)
+-->

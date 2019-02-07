@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Message DatatypesVersion="20170714" TransportVersion="20170714" TransactionDomain="SCRIPT" TransactionVersion="20170714" StructuresVersion="20170714" 
+  ECLVersion="20170714" xsi:noNamespaceSchemaLocation="transport.xsd"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">      
+   <Header>
+      <To Qualifier="P">1801849179</To>
+      <From Qualifier="P">1366629743</From>
+      <MessageID>100000</MessageID>
+      <RelatesToMessageID>900070</RelatesToMessageID>
+      <SentTime>2018-01-01T10:00:23</SentTime>
+      <SenderSoftware>
+         <SenderSoftwareDeveloper>NIST Conformance Tool</SenderSoftwareDeveloper>
+         <SenderSoftwareProduct>443</SenderSoftwareProduct>
+         <SenderSoftwareVersionRelease>12.1</SenderSoftwareVersionRelease>
+      </SenderSoftware>
+      <RxReferenceNumber>PHARMMU201</RxReferenceNumber>
+      <PrescriberOrderNumber>ORDMU201</PrescriberOrderNumber>
+   </Header>
+   <Body>
+      <RxTransferRequest>
+          <Patient>
+            <HumanPatient>
+               <Identification>
+                  <PatientAccountNumber>PBMC-ONC MU-6002B</PatientAccountNumber>
+               </Identification>
+               <Name>
+                  <LastName>Yosemite</LastName>
+                  <FirstName>John</FirstName>
+               </Name>
+               <Gender>M</Gender>
+               <DateOfBirth>
+                  <Date>1963-12-20</Date>
+               </DateOfBirth>
+               <Address>
+                  <AddressLine1>2237 Roosevelt Street</AddressLine1>
+                  <City>San Francisco</City>
+                  <StateProvince>CA</StateProvince>
+                  <PostalCode>94111</PostalCode>
+                  <CountryCode>US</CountryCode>
+               </Address>
+               <CommunicationNumbers>
+                  <PrimaryTelephone>
+                  <Number>4153421212</Number>
+                  </PrimaryTelephone>
+               </CommunicationNumbers>
+            </HumanPatient>
+         </Patient>
+         <Pharmacy>
+            <Identification>      
+               <NCPDPID>1367084</NCPDPID>
+               <NPI>1366629743</NPI>
+            </Identification>
+            <BusinessName>TX Pharmacy 10.6MU</BusinessName>
+            <Address>
+               <AddressLine1>W136 N7084 Texans Way</AddressLine1>
+               <City>Houston</City>
+               <StateProvince>TX</StateProvince>
+               <PostalCode>77001</PostalCode>
+               <CountryCode>US</CountryCode>
+            </Address>
+            <CommunicationNumbers>
+               <PrimaryTelephone>
+               <Number>8322028232</Number>
+               </PrimaryTelephone>
+            </CommunicationNumbers>
+            <TransferType>TRANSFER FROM PHARMACY</TransferType>
+         </Pharmacy>
+         <Pharmacy>
+            <Identification>      
+               <NCPDPID>9911557</NCPDPID>
+               <NPI>1801849179</NPI>
+            </Identification>
+            <BusinessName>CA Pharmacy 10.6MU</BusinessName>
+            <Address>
+               <AddressLine1>65432 Cabernet Turn</AddressLine1>
+               <City>Sonoma</City>
+               <StateProvince>CA</StateProvince>
+               <PostalCode>95476</PostalCode>
+               <CountryCode>US</CountryCode>
+            </Address>
+            <CommunicationNumbers>
+               <PrimaryTelephone>
+               <Number>7072107071</Number>
+               </PrimaryTelephone>
+            </CommunicationNumbers>
+            <TransferType>TRANSFER TO PHARMACY</TransferType>
+         </Pharmacy>
+         <Pharmacist>
+               <Identification>      
+                  <StateLicenseNumber>A523339X</StateLicenseNumber>
+               </Identification>
+               <Name>
+                  <LastName>Everett</LastName>
+                  <FirstName>Teresa</FirstName>
+               </Name>
+               <CommunicationNumbers>
+                  <PrimaryTelephone>
+                  <Number>7072107071</Number>
+                  </PrimaryTelephone>
+               </CommunicationNumbers>
+         </Pharmacist>
+         <MedicationTransferRequested>
+            <DrugDescription>Valium 2 MG Oral Tablet</DrugDescription>
+            <DrugCoded>
+               <ProductCode>
+                  <Code>00140000401</Code>
+                  <Qualifier>ND</Qualifier>
+               </ProductCode>
+               <Strength>
+                  <StrengthValue>2</StrengthValue>
+                  <StrengthForm>
+                     <Code>C42998</Code>
+                  </StrengthForm>
+                  <StrengthUnitOfMeasure>
+                     <Code>C28253</Code>
+                  </StrengthUnitOfMeasure>
+               </Strength>
+               <DrugDBCode>
+                  <Code>104699</Code>
+                  <Qualifier>SBD</Qualifier>
+               </DrugDBCode>
+               <DEASchedule>
+                  <Code>C48677</Code>
+               </DEASchedule>
+            </DrugCoded>
+            <Diagnosis>
+               <ClinicalInformationQualifier>1</ClinicalInformationQualifier>
+               <Primary>
+                  <Code>F411</Code>
+                  <Qualifier>ABF</Qualifier>
+                  <Description>Generalized anxiety disorder</Description>
+               </Primary>
+            </Diagnosis>
+         </MedicationTransferRequested>
+         <TransferRequest>SPECIFIC</TransferRequest>
+       </RxTransferRequest>
+    </Body>
+</Message>
+<!--
+NIST_NCPDP_Certification (Updated: 2018-10-30)
+-->

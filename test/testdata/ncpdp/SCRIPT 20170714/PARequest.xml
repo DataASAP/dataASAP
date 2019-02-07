@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Message DatatypesVersion="20170714" TransportVersion="20170714" TransactionDomain="SCRIPT" TransactionVersion="20170714" StructuresVersion="20170714" 
+  ECLVersion="20170714" xsi:noNamespaceSchemaLocation="transport.xsd"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">      
+   <Header>
+      <To Qualifier="PY">PAYER123</To>
+      <From Qualifier="D">1619967999</From>
+      <MessageID>500000</MessageID>
+      <RelatesToMessageID>400070</RelatesToMessageID>
+      <SentTime>2017-10-01T10:50:45</SentTime>
+      <SenderSoftware>
+         <SenderSoftwareDeveloper>NIST Conformance Tool</SenderSoftwareDeveloper>
+         <SenderSoftwareProduct>443</SenderSoftwareProduct>
+         <SenderSoftwareVersionRelease>12.1</SenderSoftwareVersionRelease>
+      </SenderSoftware>
+      <RxReferenceNumber>PHARMMU201</RxReferenceNumber>
+      <PrescriberOrderNumber>ORDMU201</PrescriberOrderNumber>
+   </Header>
+   <Body>
+      <PARequest>
+          <PAReferenceID>77XX2</PAReferenceID>
+         <BenefitsCoordination>
+            <PBMMemberID>PBMC-ONC MU-6007G</PBMMemberID>
+         </BenefitsCoordination>
+         <Patient>
+            <HumanPatient>
+               <Identification>
+                  <PatientAccountNumber>PBMC-ONC MU-6007G</PatientAccountNumber>
+               </Identification>
+               <Name>
+                  <LastName>Itasca</LastName>
+                  <FirstName>Elizabeth</FirstName>
+               </Name>
+               <Gender>F</Gender>
+               <DateOfBirth>
+                  <Date>1941-06-02</Date>
+               </DateOfBirth>
+               <Address>
+                  <AddressLine1>599 Bryan Avenue</AddressLine1>
+                  <City>Minneapolis</City>
+                  <StateProvince>MN</StateProvince>
+                  <PostalCode>55402</PostalCode>
+                  <CountryCode>US</CountryCode>
+               </Address>
+               <CommunicationNumbers>
+                  <PrimaryTelephone>
+                  <Number>6122001217</Number>
+                  </PrimaryTelephone>
+               </CommunicationNumbers>
+            </HumanPatient>
+         </Patient>
+         <Pharmacy>
+            <Identification>      
+               <NCPDPID>0001060</NCPDPID>
+               <NPI>1356609333</NPI>
+            </Identification>
+            <BusinessName>Test 000 Pharmacy 10.6MU</BusinessName>
+            <Address>
+               <AddressLine1>000 Pending Response Way</AddressLine1>
+               <City>Arlington</City>
+               <StateProvince>VA</StateProvince>
+               <PostalCode>22201</PostalCode>
+               <CountryCode>US</CountryCode>
+            </Address>
+            <CommunicationNumbers>
+               <PrimaryTelephone>
+               <Number>7032051295</Number>
+               </PrimaryTelephone>
+            </CommunicationNumbers>
+         </Pharmacy>
+         <Prescriber>
+            <NonVeterinarian>
+               <Identification>      
+                  <DEANumber>BM6040606</DEANumber>
+                  <NPI>1619967999</NPI>
+               </Identification>
+               <PracticeLocation>
+                  <BusinessName>Clinic One6</BusinessName>
+               </PracticeLocation>
+               <Name>
+                  <LastName>MacClare</LastName>
+                  <FirstName>Susan</FirstName>
+               </Name>
+               <Address>
+                  <AddressLine1>10105 Trailblazer Ct</AddressLine1>
+                  <City>Portland</City>
+                  <StateProvince>OR</StateProvince>
+                  <PostalCode>97215</PostalCode>
+                  <CountryCode>US</CountryCode>
+               </Address>
+               <CommunicationNumbers>
+                  <PrimaryTelephone>
+                  <Number>5034732233</Number>
+                  </PrimaryTelephone>
+               </CommunicationNumbers>
+            </NonVeterinarian>
+         </Prescriber>
+         <MedicationPrescribed>
+            <DrugDescription>Lovenox 80 MG per 0.8 ML Prefilled Syringe</DrugDescription>
+            <DrugCoded>
+               <ProductCode>
+                  <Code>00075062280</Code>
+                  <Qualifier>ND</Qualifier>
+               </ProductCode>
+               <Strength>
+                  <StrengthValue>80/0.8</StrengthValue>
+                  <StrengthForm>
+                     <Code>C91180</Code>
+                  </StrengthForm>
+                  <StrengthUnitOfMeasure>
+                     <Code>C42576</Code>
+                  </StrengthUnitOfMeasure>
+               </Strength>
+               <DrugDBCode>
+                  <Code>854242</Code>
+                  <Qualifier>SBD</Qualifier>
+               </DrugDBCode>
+            </DrugCoded>
+            <Quantity>
+               <Value>24</Value>
+               <CodeListQualifier>38</CodeListQualifier>
+               <QuantityUnitOfMeasure>
+                  <Code>C28254</Code>
+                </QuantityUnitOfMeasure>
+            </Quantity>
+            <DaysSupply>15</DaysSupply>
+            <Substitutions>0</Substitutions>
+            <Diagnosis>
+               <ClinicalInformationQualifier>1</ClinicalInformationQualifier>
+               <Primary>
+                  <Code>I82411</Code>
+                  <Qualifier>ABF</Qualifier>
+                  <Description>Acute embolism and thrombosis of right femoral vein</Description>
+               </Primary>
+            </Diagnosis>
+            <Sig>
+               <SigText>Inject 80 MG subcutaneously every 12 hours.</SigText>
+            </Sig>
+         </MedicationPrescribed>
+         <Request>
+            <SolicitedModel>
+               <PACaseID>A102</PACaseID>
+               <DeadlineForReply>
+                  <DateTime>2018-10-01T23:59:59</DateTime>
+               </DeadlineForReply>
+               <QuestionSet>
+                   <Header>
+                       <QuestionSetID>QS101</QuestionSetID>
+                       <QuestionSetTitle>Lovenox PA Form</QuestionSetTitle>
+                       <QuestionSetDescription>Please provide all information requested. Failure to complete this form in its entirety may result in delayed processing or an adverse determination for insufficient information.</QuestionSetDescription>
+                       <QuestionSetContactCommunicationNumber>
+                           <PrimaryTelephone> 
+                               <Number>5555551212</Number>
+                           </PrimaryTelephone> 
+                       </QuestionSetContactCommunicationNumber> 
+                       <AttachementRequired>N</AttachementRequired>
+                   </Header> 
+                   <Question> 
+                       <QuestionID>Q1</QuestionID>
+                       <SequenceNumber>1</SequenceNumber>
+                       <QuestionText>Is this patient home self-administering?</QuestionText> 
+                       <DefaultNextQuestionID>Q2</DefaultNextQuestionID>
+                       <QuestionType>
+                           <Select> 
+                               <SelectMultiple>N</SelectMultiple>
+                               <Choice> 
+                                   <ChoiceID>Q1C1</ChoiceID>
+                                   <SequenceNumber>1</SequenceNumber>
+                                   <ChoiceText>Yes</ChoiceText> 
+                                   <AdditionalFreeTextIndicator>NA</AdditionalFreeTextIndicator>
+                               </Choice> 
+                               <Choice>
+                                   <ChoiceID>Q1C2</ChoiceID>
+                                   <SequenceNumber>2</SequenceNumber>
+                                   <ChoiceText>No</ChoiceText>
+                                   <AdditionalFreeTextIndicator>NA</AdditionalFreeTextIndicator>
+                               </Choice>
+                               <Answer> 
+                                   <PrescriberProvidedAnswer>
+                                       <ChoiceID>Q1C1</ChoiceID> 
+                                   </PrescriberProvidedAnswer> 
+                               </Answer>
+                           </Select> 
+                       </QuestionType> 
+                   </Question>
+                   <Question>
+                       <QuestionID>Q2</QuestionID> 
+                       <SequenceNumber>2</SequenceNumber>
+                       <QuestionText>Is the medication to be used to treat prophylaxis?</QuestionText>
+                       <QuestionType> 
+                           <Select> 
+                               <SelectMultiple>N</SelectMultiple> 
+                               <Choice>
+                                   <ChoiceID>Q2C1</ChoiceID>
+                                   <SequenceNumber>1</SequenceNumber>
+                                   <ChoiceText>Yes</ChoiceText> 
+                                   <AdditionalFreeTextIndicator>NA</AdditionalFreeTextIndicator>
+                                   <NextQuestionID>Q3</NextQuestionID> 
+                               </Choice> 
+                               <Choice> 
+                                   <ChoiceID>Q2C2</ChoiceID>
+                                   <SequenceNumber>2</SequenceNumber>
+                                   <ChoiceText>No</ChoiceText>
+                                   <AdditionalFreeTextIndicator>NA</AdditionalFreeTextIndicator>
+                                   <NextQuestionID>Q4</NextQuestionID>
+                               </Choice>
+                               <Answer> 
+                                   <PrescriberProvidedAnswer> 
+                                       <ChoiceID>Q2C2</ChoiceID> 
+                                   </PrescriberProvidedAnswer> 
+                               </Answer> 
+                           </Select>
+                       </QuestionType>
+                   </Question> 
+                   <Question>
+                       <QuestionID>Q3</QuestionID>
+                       <SequenceNumber>3</SequenceNumber>
+                       <QuestionText>When was or will the surgery be done?</QuestionText>
+                       <DefaultNextQuestionID>Q6</DefaultNextQuestionID> 
+                       <QuestionType> 
+                           <Date> 
+                               <Date> 
+                                   <IsDateTimeRequired>N</IsDateTimeRequired>
+                               </Date> 
+                           </Date> 
+                       </QuestionType> 
+                   </Question>
+                   <Question>
+                       <QuestionID>Q4</QuestionID>
+                       <SequenceNumber>4</SequenceNumber> 
+                       <QuestionText>Is the medication to be used for treatment of DVT?</QuestionText> 
+                       <QuestionType>
+                           <Select>
+                               <SelectMultiple>N</SelectMultiple> 
+                               <Choice>
+                                   <ChoiceID>Q4C1</ChoiceID> 
+                                   <SequenceNumber>1</SequenceNumber>
+                                   <ChoiceText>Yes</ChoiceText>
+                                   <AdditionalFreeTextIndicator>NA</AdditionalFreeTextIndicator>
+                                   <NextQuestionID>Q5</NextQuestionID> 
+                               </Choice> 
+                               <Choice>
+                                   <ChoiceID>Q4C2</ChoiceID>
+                                   <SequenceNumber>2</SequenceNumber>
+                                   <ChoiceText>No</ChoiceText>
+                                   <AdditionalFreeTextIndicator>NA</AdditionalFreeTextIndicator>
+                                   <NextQuestionID>Q6</NextQuestionID>
+                               </Choice> 
+                               <Answer>
+                                   <PrescriberProvidedAnswer> 
+                                       <ChoiceID>Q4C1</ChoiceID> 
+                                   </PrescriberProvidedAnswer> 
+                               </Answer>
+                           </Select>
+                       </QuestionType> 
+                   </Question> 
+                   <Question>
+                       <QuestionID>Q5</QuestionID>
+                       <SequenceNumber>5</SequenceNumber>
+                       <QuestionText>What is the patient's weight (in pounds)?</QuestionText>
+                       <DefaultNextQuestionID>Q6</DefaultNextQuestionID>
+                       <QuestionType> 
+                           <Numeric> 
+                               <IsNumeric>Y</IsNumeric> 
+                               <Answer>
+                                   <PrescriberProvidedNumericAnswer>176</PrescriberProvidedNumericAnswer>
+                               </Answer>
+                           </Numeric> 
+                       </QuestionType>
+                   </Question> 
+                   <Question>
+                       <QuestionID>Q6</QuestionID>
+                       <SequenceNumber>6</SequenceNumber>
+                       <QuestionText>Describe result of Warfarin use (include INR and date drawn) or reason why patient can't use Warfarin.</QuestionText>
+                       <DefaultNextQuestionID>END</DefaultNextQuestionID> 
+                       <QuestionType> 
+                           <FreeText> 
+                               <IsFreeText>Y</IsFreeText> 
+                               <Answer>
+                                   <PrescriberProvidedAnswer>Patient has an allergy to Warfarin</PrescriberProvidedAnswer> 
+                               </Answer>
+                           </FreeText>
+                       </QuestionType>
+                   </Question>
+               </QuestionSet>
+            </SolicitedModel>
+         </Request>
+      </PARequest>
+    </Body>
+</Message>
+<!--
+NIST_NCPDP_Certification (Updated: 2018-10-30)
