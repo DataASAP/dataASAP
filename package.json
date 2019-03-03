@@ -12,6 +12,7 @@
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "electron-context-menu": "^0.10.0",
+    "electron-prebuilt-compile": "^4.0.0",
     "fast-xml-parser": "^3.12.5",
     "he": "^1.2.0",
     "history": "^4.6.3",
@@ -79,7 +80,6 @@
     "url": "https://github.com/dcheli/dataASAP/issues"
   },
   "homepage": "https://github.com/dcheli/",
-
   "keywords": [
     "HIPAA",
     "deidentify",
