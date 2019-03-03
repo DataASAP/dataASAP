@@ -9,6 +9,12 @@ The use case this addresses is the situation where you need to send a deidentifi
 
 If you would like to get involved with this project as a developer, tester, submit ideas to improve it, please see the [How to Help](#how-to-help) section below. 
 
+### Quick Start
+```sh
+npm install
+npx electron app/main
+```
+
 ### How it Works
 The screen shots below show what the application looks like and how it works. 
 
