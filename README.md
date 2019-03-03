@@ -10,9 +10,12 @@ The use case this addresses is the situation where you need to send a deidentifi
 If you would like to get involved with this project as a developer, tester, submit ideas to improve it, please see the [How to Help](#how-to-help) section below. 
 
 ### Quick Start
+If you want to download the project and run it in development mode, clone the software into a folder, change directories into that folder and run the following command:
 ```sh
 npm install
 npx electron app/main
+(or)
+npm run dev
 ```
 
 ### How it Works
