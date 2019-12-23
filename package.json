@@ -1,6 +1,6 @@
 {
   "name": "dataasap",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Tool for easily deidentifying healthcare transactions.",
   "main": "init.js",
   "author": "Dave Cheli <dcheli@live.com>",
@@ -12,7 +12,6 @@
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "electron-context-menu": "^0.10.0",
-    "electron-prebuilt-compile": "^4.0.0",
     "fast-xml-parser": "^3.12.5",
     "he": "^1.2.0",
     "history": "^4.6.3",
@@ -30,7 +29,7 @@
     "semantic-ui-react": "^0.84.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.22.2",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.2.1",
     "babel-eslint": "^8.2.6",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -55,7 +54,7 @@
   },
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
-    "dev": "npm run private:compile -- --source-maps true && run-p -r private:watch private:serve",
+    "start": "npm run private:compile -- --source-maps true && run-p -r private:watch private:serve",
     "test": "electron-mocha --renderer -R spec --require babel-core/register test/**/*.spec.js",
     "lint": "eslint --no-ignore scripts app test *.js",
     "format": "npm run private:format -- --write",
