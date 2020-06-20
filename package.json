@@ -1,6 +1,6 @@
 {
   "name": "dataasap",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Tool for easily deidentifying healthcare transactions.",
   "main": "init.js",
   "author": "Dave Cheli <dcheli@live.com>",
