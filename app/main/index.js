@@ -40,6 +40,10 @@ function createConfigWindow(type) {
         height: 1000,
         width: 1200,
         title: "Config Stuff",
+        webPreferences: {
+          backgroundThrottling: false,
+          nodeIntegration: true
+      },
         // Note that the icon attribute is only used in development mode
         icon: iconImage
     });
@@ -74,7 +78,8 @@ app.on('ready', async () => {
   mainWindow = new BrowserWindow({
     show: false,
     webPreferences: {
-        backgroundThrottling: false
+        backgroundThrottling: false,
+        nodeIntegration: true
     },
     // Note that the icon attribute is only used in development mode
     icon: iconImage
