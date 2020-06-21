@@ -12,21 +12,14 @@
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "electron-context-menu": "^2.0.1",
-    "electron-prebuilt-compile": "^8.2.0",
     "fast-xml-parser": "^3.17.4",
     "he": "^1.2.0",
-    "history": "^4.10.1",
-    "prop-types": "^15.7.2",
+    "lodash": "^4.17.15",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^5.1.2",
-    "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-router-redux": "^5.0.0-alpha.8",
     "redux": "^4.0.5",
-    "redux-actions": "^2.6.5",
-    "redux-localstorage": "^0.4.1",
-    "redux-thunk": "^2.2.0",
     "semantic-ui-react": "^0.84.0"
   },
   "devDependencies": {
@@ -40,7 +33,6 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "browser-sync": "^2.26.7",
-    "chai": "^4.1.0",
     "electron": "^9.0.4",
     "electron-builder": "^22.0.0",
     "electron-devtools-installer": "^2.2.4",
@@ -50,7 +42,6 @@
     "eslint-plugin-react": "^7.20.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1",
-    "redux-mock-store": "^1.5.4",
     "rimraf": "^2.7.1"
   },
   "scripts": {
