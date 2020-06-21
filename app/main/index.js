@@ -42,7 +42,8 @@ function createConfigWindow(type) {
         title: "Config Stuff",
         webPreferences: {
           backgroundThrottling: false,
-          nodeIntegration: true
+          nodeIntegration: true,
+          enableRemoteModule: true
       },
         // Note that the icon attribute is only used in development mode
         icon: iconImage
@@ -79,7 +80,8 @@ app.on('ready', async () => {
     show: false,
     webPreferences: {
         backgroundThrottling: false,
-        nodeIntegration: true
+        nodeIntegration: true,
+        enableRemoteModule: true
     },
     // Note that the icon attribute is only used in development mode
     icon: iconImage

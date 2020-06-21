@@ -20,8 +20,8 @@ let deidentifySCRIPT_10_6 = (input, transactionInfo) => {
         cdataPositionChar: "\\c",
         localeRange: "", //To support non english character in tag/attribute values.
         parseTrueNumberOnly: false,
-        attrValueProcessor: a => he.decode(a, {isAttributeValue: true}),//default is a=>a
-        tagValueProcessor : a => he.decode(a) //default is a=>a
+        attrValueProcessor: a => he.decode(String(a), {isAttributeValue: true}),//default is a=>a
+        tagValueProcessor : a => he.decode(String(a)) //default is a=>a
     };
     
     var deidentifiedData;
